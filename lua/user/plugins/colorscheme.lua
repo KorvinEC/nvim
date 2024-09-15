@@ -1,8 +1,13 @@
 return {
-    "briones-gabriel/darcula-solid.nvim",
-    dependencies = { "rktjmp/lush.nvim" },
+    "rebelot/kanagawa.nvim",
     priority = 1000,
-    config = function()
-        vim.cmd("colorscheme darcula-solid")
-    end,
+    config = function ()
+        local kanagawa = require("kanagawa")
+
+        kanagawa.setup({
+            theme = "wave",
+        })
+
+        vim.cmd("colorscheme kanagawa-dragon")
+    end
 }
