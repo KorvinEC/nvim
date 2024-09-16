@@ -30,6 +30,7 @@ return {
                 "bash",
                 "groovy",
                 "dockerfile",
+                "json"
             },
         })
     end
