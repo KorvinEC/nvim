@@ -50,6 +50,7 @@ return {
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Search files" })
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Search old files" })
         vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
+        vim.keymap.set('n', '<leader>fc', function () builtin.live_grep({search_dirs={vim.fn.expand("%:p")}}) end, { desc = "Live grep current file" })
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Search in buffers" })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
         vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
