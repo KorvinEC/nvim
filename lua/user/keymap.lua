@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("n", "<leader>fv", vim.cmd.Ex) 
+keymap.set("n", "<leader>fv", vim.cmd.Ex)
 keymap.set("n", "<C-_>", "gcc", { remap = true })
 keymap.set("v", "<C-_>", "gcc", { remap = true })
 
@@ -16,6 +16,13 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
+
+keymap.set("n", "<C-b>k", "<cmd>bnext<CR>")
+keymap.set("n", "<C-b>j", "<cmd>bprevious<CR>")
+keymap.set("n", "<C-b>h", "<cmd>bfirst<CR>")
+keymap.set("n", "<C-b>l", "<cmd>blast<CR>")
+keymap.set("n", "<C-b>s", "<cmd>ls<CR>")
+keymap.set("n", "<C-b>x", "<cmd>bdelete<CR>")
 
 -- keymap.set("n", "<Alt-b>k", ":bn<CR>")
 -- keymap.set("n", "<Alt-b>j", ":bp<CR>")
