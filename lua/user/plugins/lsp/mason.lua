@@ -16,7 +16,8 @@ return {
                 "pyright",
                 "lua_ls",
                 "bashls",
-                "groovyls"
+                "groovyls",
+                "ruff",
             },
         })
     end,
