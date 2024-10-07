@@ -24,6 +24,5 @@ keymap.set("n", "<C-b>l", "<cmd>blast<CR>")
 keymap.set("n", "<C-b>s", "<cmd>ls<CR>")
 keymap.set("n", "<C-b>x", "<cmd>bdelete<CR>")
 
--- keymap.set("n", "<Alt-b>k", ":bn<CR>")
--- keymap.set("n", "<Alt-b>j", ":bp<CR>")
--- keymap.set("n", "<Alt-b>d", ":bd<CR>")
+keymap.set("n", "<leader>ol", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+keymap.set("n", "<leader>om", "<cmd>Mason<CR>", { desc = "Open Mason" })
