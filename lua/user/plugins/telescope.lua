@@ -10,7 +10,24 @@ return {
         -- setup telescope
         local telescope = require("telescope")
 
+        local builtin = require('telescope.builtin')
+        local actions = require("telescope.actions")
+        local undo_actions = require("telescope-undo.actions")
+
         telescope.setup({
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<C-j>"] = actions.cycle_history_next,
+                        ["<C-k>"] = actions.cycle_history_prev,
+                    },
+                    n = {
+                        ["<C-j>"] = actions.cycle_history_next,
+                        ["<C-k>"] = actions.cycle_history_prev,
+                        ["<q>"] = actions.close,
+                    },
+                },
+            },
             extensions = {
                 undo = {
                     use_delta = true,
@@ -24,17 +41,17 @@ return {
                     saved_only = false,
                     mappings = {
                         i = {
-                            ["<cr>"] = require("telescope-undo.actions").restore,
-                            ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-                            ["<C-cr>"] = require("telescope-undo.actions").yank_additions,
+                            ["<cr>"] = undo_actions.restore,
+                            ["<S-cr>"] = undo_actions.yank_deletions,
+                            ["<C-cr>"] = undo_actions.yank_additions,
                             -- alternative defaults, for users whose terminals do questionable things with modified <cr>
-                            ["<C-y>"] = require("telescope-undo.actions").yank_deletions,
-                            ["<C-r>"] = require("telescope-undo.actions").restore,
+                            ["<C-y>"] = undo_actions.yank_deletions,
+                            ["<C-r>"] = undo_actions.restore,
                         },
                         n = {
-                            ["y"] = require("telescope-undo.actions").yank_additions,
-                            ["Y"] = require("telescope-undo.actions").yank_deletions,
-                            ["u"] = require("telescope-undo.actions").restore,
+                            ["y"] = undo_actions.yank_additions,
+                            ["Y"] = undo_actions.yank_deletions,
+                            ["u"] = undo_actions.restore,
                         },
                     },
                 }
@@ -45,14 +62,14 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("undo")
 
-        local builtin = require('telescope.builtin')
+        local keymap = vim.keymap
 
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Search files" })
-        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Search old files" })
-        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
-        vim.keymap.set('n', '<leader>fc', function () builtin.live_grep({search_dirs={vim.fn.expand("%:p")}}) end, { desc = "Live grep current file" })
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Search in buffers" })
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
-        vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
+        keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Search files" })
+        keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Search old files" })
+        keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
+        keymap.set('n', '<leader>fc', function () builtin.live_grep({search_dirs={vim.fn.expand("%:p")}}) end, { desc = "Live grep current file" })
+        keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Search in buffers" })
+        keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
+        keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
     end,
 }
