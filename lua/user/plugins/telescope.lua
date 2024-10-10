@@ -10,7 +10,6 @@ return {
         -- setup telescope
         local telescope = require("telescope")
 
-        local builtin = require('telescope.builtin')
         local actions = require("telescope.actions")
         local undo_actions = require("telescope-undo.actions")
 
@@ -63,6 +62,7 @@ return {
         telescope.load_extension("undo")
 
         local keymap = vim.keymap
+        local builtin = require('telescope.builtin')
 
         keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Search files" })
         keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Search old files" })
@@ -71,5 +71,6 @@ return {
         keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Search in buffers" })
         keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
         keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
+        keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Show buffer diagnostics" })
     end,
 }
