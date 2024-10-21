@@ -33,7 +33,7 @@ return {
 
         local keymap = vim.keymap
 
-        keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-        keymap.set("n", "<leader>T", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
+        keymap.set("n", "<leader>t", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
+        keymap.set("n", "<leader>T", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
     end
 }
