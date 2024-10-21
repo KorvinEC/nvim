@@ -78,5 +78,6 @@ return {
         keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
         keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
         keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Show buffer diagnostics" })
+        keymap.set("n", "<leader>fv", builtin.git_status, { desc = "Show git changed files" })
     end,
 }
