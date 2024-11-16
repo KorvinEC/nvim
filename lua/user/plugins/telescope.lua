@@ -27,6 +27,18 @@ return {
                     },
                 },
             },
+            pickers = {
+                buffers = {
+                    mappings = {
+                        i = {
+                            ["<C-d>"] = actions.delete_buffer,
+                        },
+                        n = {
+                            ["<C-d>"] = actions.delete_buffer,
+                        },
+                    },
+                },
+            },
             extensions = {
                 fzf = {
                     fuzzy = true,                    -- false will only do exact matching
