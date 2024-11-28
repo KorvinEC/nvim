@@ -4,6 +4,7 @@ return {
     dependencies = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
         {
             "L3MON4D3/LuaSnip",
@@ -16,6 +17,28 @@ return {
         local cmp = require("cmp")
 
         local luasnip = require("luasnip")
+
+        cmp.setup.cmdline("/", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
+            },
+        })
+
+        -- `:` cmdline setup.
+        cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "path" },
+            }, {
+                    {
+                        name = "cmdline",
+                        option = {
+                            ignore_cmds = { "Man", "!" },
+                        },
+                    },
+                }),
+        })
 
         cmp.setup({
             completion = {
