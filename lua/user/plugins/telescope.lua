@@ -78,6 +78,7 @@ return {
 
         telescope.load_extension("fzf")
         telescope.load_extension("undo")
+        telescope.load_extension("noice")
 
         local keymap = vim.keymap
         local builtin = require('telescope.builtin')
@@ -91,5 +92,6 @@ return {
         keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
         keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Show buffer diagnostics" })
         keymap.set("n", "<leader>fv", builtin.git_status, { desc = "Show git changed files" })
+        keymap.set("n", "<leader>fn", "<cmd>Noice telescope<CR>", { desc = "Search over Noice" })
     end,
 }
