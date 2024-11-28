@@ -15,6 +15,11 @@ return {
 
         telescope.setup({
             defaults = {
+                layout_config = {
+                    width = 0.90,
+                    height = 0.80,
+                },
+                borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
                 mappings = {
                     i = {
                         ["<C-j>"] = actions.cycle_history_next,
