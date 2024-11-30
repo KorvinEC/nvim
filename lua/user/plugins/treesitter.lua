@@ -2,6 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        "folke/which-key.nvim",
     },
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
@@ -119,5 +120,14 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
         vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+
+
+        local which_key = require("which-key")
+
+        which_key.add({
+            {"<leader>s", group = " Swap parameters"},
+            {"<leader>sp", group = " Swap previous previous"},
+            {"<leader>sn", group = " Swap with next"},
+        })
     end
 }

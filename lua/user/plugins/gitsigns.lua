@@ -1,6 +1,9 @@
 return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+        "folke/which-key.nvim",
+    },
     opts = {},
     config = function()
         require('gitsigns').setup{
@@ -49,5 +52,11 @@ return {
                 map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = "Select hunk"})
             end
         }
+
+        local which_key = require("which-key")
+
+        which_key.add({
+            {"<leader>h", group = " Git signs"}
+        })
     end
 }
