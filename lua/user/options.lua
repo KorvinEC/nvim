@@ -36,9 +36,3 @@ opt.scrolloff = 4
 
 opt.signcolumn = "yes"
 opt.backspace = "indent,eol,start"
-
-vim.filetype.add {
-    pattern = {
-        [".*nf.*"] = "nf"
-    }
-}
