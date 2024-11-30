@@ -3,7 +3,8 @@ return {
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
-        { "debugloop/telescope-undo.nvim" }
+        { "debugloop/telescope-undo.nvim" },
+        { "folke/which-key.nvim" },
     },
     tag = '0.1.8',
     config = function()
@@ -98,5 +99,11 @@ return {
         keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Show buffer diagnostics" })
         keymap.set("n", "<leader>fv", builtin.git_status, { desc = "Show git changed files" })
         keymap.set("n", "<leader>fn", "<cmd>Noice telescope<CR>", { desc = "Search over Noice" })
+
+        local which_key = require("which-key")
+
+        which_key.add({
+            {"<leader>f", group = " Telescope search"}
+        })
     end,
 }

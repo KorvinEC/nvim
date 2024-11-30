@@ -30,4 +30,14 @@ return {
         { '<leader>wf', '<cmd>SessionSearch<CR>', desc = 'Session search' },
         { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
     },
+    config = function ()
+        local which_key = require("which-key")
+
+        which_key.add({
+            { "<leader>w", group = " Workspace (Auto-session)" }
+        })
+    end,
+    dependencies = {
+        "folke/which-key.nvim",
+    }
 }
