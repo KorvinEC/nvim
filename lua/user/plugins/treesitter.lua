@@ -32,7 +32,7 @@ return {
                     init_selection = "<A-i>",
                     node_incremental = "<A-i>",
                     scope_incremental = false,
-                    node_decremental = "<A-I>",
+                    node_decremental = "<A-d>",
                 },
             },
             textobjects = {
@@ -42,6 +42,7 @@ return {
                     keymaps = {
                         ["ad"] = { query = "@assignment.outer", desc = "Select outer assignment" },
                         ["id"] = { query = "@assignment.inner", desc = "Select inner assignment" },
+
                         ["ld"] = { query = "@assignment.lhs", desc = "Select left side of an assignment" },
                         ["rd"] = { query = "@assignment.rhs", desc = "Select right side of an assignment" },
 
@@ -51,16 +52,24 @@ return {
                         ["af"] = { query = "@function.outer", desc = "Select outer function" },
                         ["if"] = { query = "@function.inner", desc = "Select inner function" },
 
-                        ["ic"] = { query = "@call.inner", desc = "Select inner call" },
-                        ["ac"] = { query = "@call.outer", desc = "Select outer call" },
+                        ["ic"] = { query = "@class.inner", desc = "Select inner class" },
+                        ["ac"] = { query = "@class.outer", desc = "Select outer class" },
+
+                        ["iv"] = { query = "@call.inner", desc = "Select inner call" },
+                        ["av"] = { query = "@call.outer", desc = "Select outer call" },
 
                         ["ii"] = { query = "@conditional.inner", desc = "Select inner conditional" },
                         ["ai"] = { query = "@conditional.outer", desc = "Select outer conditional" },
 
                         ["il"] = { query = "@loop.inner", desc = "Select inner loop" },
                         ["al"] = { query = "@loop.outer", desc = "Select outer loop" },
+
+                        ["i/"] = { query = "@comment.inner", desc = "Select inner comment" },
+                        ["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
+
+                        ["ib"] = { query = "@block.inner", desc = "Select inner block" },
+                        ["ab"] = { query = "@block.outer", desc = "Select outer block" },
                     },
-                    include_surrounding_whitespace = true,
                     selection_modes = {
                         ['@parameter.outer'] = 'v',
                     },
@@ -68,12 +77,12 @@ return {
                 swap = {
                     enable = true,
                     swap_next = {
-                        ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-                        ["<leader>nf"] = "@function.outer", -- swap function with next
+                        ["<leader>san"] = { query = "@parameter.inner", desc = "Swap parameters/arguments with next" }, -- swap parameters/argument with next
+                        ["<leader>sfn"] = { query = "@function.outer", desc = "Swap function with next" }, -- swap function with next
                     },
                     swap_previous = {
-                        ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-                        ["<leader>pm"] = "@function.outer", -- swap function with previous
+                        ["<leader>sap"] = { query = "@parameter.inner", desc = "Swap parameters/arguments with previous" }, -- swap parameters/argument with prev
+                        ["<leader>sfp"] = { query = "@function.outer", desc = "Swap function with previous" }, -- swap function with previous
                     },
                 },
                 move = {
@@ -84,7 +93,6 @@ return {
                         ["]c"] = { query = "@call.outer", desc = "Next function call start" },
                         ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
                         ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
-
                         ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
                         ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
                     },
@@ -125,9 +133,9 @@ return {
         local which_key = require("which-key")
 
         which_key.add({
-            {"<leader>s", group = " Swap parameters"},
-            {"<leader>sp", group = " Swap previous previous"},
-            {"<leader>sn", group = " Swap with next"},
+            {"<leader>s", group = " Swap groups"},
+            {"<leader>sa", group = " Swap parameters/arguments"},
+            {"<leader>sf", group = " Swap functions"},
         })
     end
 }
