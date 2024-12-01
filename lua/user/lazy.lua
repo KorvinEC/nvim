@@ -20,9 +20,8 @@ require("lazy").setup({
     spec = {
         -- import your plugins
         { "rktjmp/lush.nvim" },
-        { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" },
-        { import = "user.plugins" },
-        { import = "user.plugins.lsp" }
+        { import = "user.plugins", opts = { colorscheme = "kanagawa-dragon" } },
+        { import = "user.plugins.lsp", opts = { colorscheme = "kanagawa-dragon" } }
     },
     -- automatically check for plugin updates
     checker = {
