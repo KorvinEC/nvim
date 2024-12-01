@@ -11,7 +11,6 @@ return {
             version = "v2.*",
             build = "make install_jsregexp"
         },
-        "saadparwaiz1/cmp_luasnip",
     },
     config = function()
         local cmp = require("cmp")
