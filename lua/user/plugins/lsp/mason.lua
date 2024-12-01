@@ -17,6 +17,9 @@ return {
                 "lua_ls",
                 "bashls",
                 "ruff",
+                "html",
+                "ts_ls",
+                "eslint",
             },
         })
     end,
