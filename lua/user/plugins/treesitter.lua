@@ -18,6 +18,7 @@ return {
                 "query",
                 "python",
                 "bash",
+                "groovy",
                 "dockerfile",
                 "json",
                 "javascript",
@@ -158,7 +159,6 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 
-
         local which_key = require("which-key")
 
         which_key.add({
@@ -166,5 +166,7 @@ return {
             {"<leader>sa", group = " Swap parameters/arguments"},
             {"<leader>sf", group = " Swap functions"},
         })
+
+        vim.treesitter.language.register('groovy', 'nf')
     end
 }
