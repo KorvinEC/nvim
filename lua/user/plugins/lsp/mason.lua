@@ -16,6 +16,7 @@ return {
                 "pyright",
                 "lua_ls",
                 "bashls",
+                "groovyls",
                 "ruff",
                 "html",
                 "ts_ls",
