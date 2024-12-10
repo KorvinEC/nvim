@@ -13,11 +13,11 @@ return {
 
         mason_lspconfig.setup({
             ensure_installed = {
-                "pyright",
+                "basedpyright",
+                "ruff",
                 "lua_ls",
                 "bashls",
                 "groovyls",
-                "ruff",
                 "html",
                 "ts_ls",
                 "eslint",
