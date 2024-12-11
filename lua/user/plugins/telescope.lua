@@ -6,6 +6,7 @@ return {
         { "debugloop/telescope-undo.nvim" },
         { "folke/which-key.nvim" },
         { 'nvim-tree/nvim-web-devicons' },
+        { "nvim-telescope/telescope-file-browser.nvim" }
     },
     tag = '0.1.8',
     config = function()
@@ -15,8 +16,12 @@ return {
         local actions = require("telescope.actions")
         local undo_actions = require("telescope-undo.actions")
 
+        -- This line should be before usual (normal) setup
+        telescope.setup({ defaults = require('telescope.themes').get_ivy() })
+
         telescope.setup({
             defaults = {
+                layout_config = { height = 0.80 },
                 mappings = {
                     i = {
                         ["<C-j>"] = actions.cycle_history_next,
@@ -78,14 +83,17 @@ return {
                             ["u"] = undo_actions.restore,
                         },
                     },
+                },
+                file_browser = {
+                    hijack_netrw = true,
                 }
             }
         })
-        telescope.setup({ defaults = require('telescope.themes').get_ivy() })
 
         telescope.load_extension("fzf")
         telescope.load_extension("undo")
         telescope.load_extension("noice")
+        telescope.load_extension("file_browser")
 
         local keymap = vim.keymap
         local builtin = require('telescope.builtin')
@@ -97,10 +105,21 @@ return {
         keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Buffers" })
         keymap.set('n', '<leader>f/', builtin.help_tags, { desc = "Help" })
         keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
-        keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Current buffer diagnostics" })
         keymap.set("n", "<leader>fs", builtin.git_status, { desc = "Git status" })
         keymap.set("n", "<leader>fn", "<cmd>Noice telescope<CR>", { desc = "Noice (last messages)" })
         keymap.set("n", "<leader>fh", builtin.command_history, { desc = "Command history" })
+        keymap.set("n", "<leader>fd", function ()
+            builtin.diagnostics({bufnr=0})
+        end, { desc = "Current buffer diagnostics" })
+        keymap.set("n", "<leader>t", function()
+            telescope.extensions.file_browser.file_browser()
+        end, { desc = "File browser" })
+        keymap.set("n", "<leader>T", function()
+            telescope.extensions.file_browser.file_browser({
+                path="%:p:h",
+                select_buffer=true,
+            })
+        end, { desc = "File browser current buffer" })
 
         local which_key = require("which-key")
 
