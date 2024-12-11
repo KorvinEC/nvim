@@ -5,6 +5,7 @@ return {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
         { "debugloop/telescope-undo.nvim" },
         { "folke/which-key.nvim" },
+        { 'nvim-tree/nvim-web-devicons' },
     },
     tag = '0.1.8',
     config = function()
@@ -16,11 +17,6 @@ return {
 
         telescope.setup({
             defaults = {
-                layout_config = {
-                    width = 0.90,
-                    height = 0.80,
-                },
-                borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
                 mappings = {
                     i = {
                         ["<C-j>"] = actions.cycle_history_next,
@@ -29,12 +25,16 @@ return {
                     n = {
                         ["<C-j>"] = actions.cycle_history_next,
                         ["<C-k>"] = actions.cycle_history_prev,
-                        ["<q>"] = actions.close,
+                        ["q"] = actions.close,
                     },
                 },
+                require("telescope.themes").get_ivy(),
             },
             pickers = {
+                diagnostics = { initial_mode = "normal" },
+                git_status = { initial_mode = "normal" },
                 buffers = {
+                    initial_mode = "normal",
                     mappings = {
                         i = {
                             ["<C-d>"] = actions.delete_buffer,
@@ -81,6 +81,7 @@ return {
                 }
             }
         })
+        telescope.setup({ defaults = require('telescope.themes').get_ivy() })
 
         telescope.load_extension("fzf")
         telescope.load_extension("undo")
@@ -89,16 +90,17 @@ return {
         local keymap = vim.keymap
         local builtin = require('telescope.builtin')
 
-        keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Search files" })
-        keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Search old files" })
+        keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
+        keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Old files" })
         keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
-        keymap.set('n', '<leader>fc', function () builtin.live_grep({search_dirs={vim.fn.expand("%:p")}}) end, { desc = "Live grep current file" })
-        keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Search in buffers" })
-        keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help" })
+        keymap.set('n', '<leader>fc', builtin.current_buffer_fuzzy_find, { desc = "Current buffer fuzzy find" })
+        keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Buffers" })
+        keymap.set('n', '<leader>f/', builtin.help_tags, { desc = "Help" })
         keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = "Undo" })
-        keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Show buffer diagnostics" })
-        keymap.set("n", "<leader>fv", builtin.git_status, { desc = "Show git changed files" })
-        keymap.set("n", "<leader>fn", "<cmd>Noice telescope<CR>", { desc = "Search over Noice" })
+        keymap.set("n", "<leader>fd", function () builtin.diagnostics({bufnr=0}) end, { desc = "Current buffer diagnostics" })
+        keymap.set("n", "<leader>fs", builtin.git_status, { desc = "Git status" })
+        keymap.set("n", "<leader>fn", "<cmd>Noice telescope<CR>", { desc = "Noice (last messages)" })
+        keymap.set("n", "<leader>fh", builtin.command_history, { desc = "Command history" })
 
         local which_key = require("which-key")
 
