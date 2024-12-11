@@ -38,6 +38,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 opt.clipboard = "unnamedplus"
 
+local kernel_name_release = vim.fn.system { 'uname', '--kernel-name', '--kernel-release'  }
+if kernel_name_release:find("Linux") and kernel_name_release:find("WSL") then
+    vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy = {
+            ['+'] =  'clip.exe',
+            ['*'] =  'clip.exe',
+        },
+        paste = {
+            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
+    }
+end
+
 opt.hlsearch = true
 opt.incsearch = true
 
