@@ -172,7 +172,7 @@ return {
 
         which_key.add({
             {"<leader>s", group = " Swap groups"},
-            {"<leader>sa", group = " Swap parameters/arguments"},
+            {"<leader>sa", group = " Swap arguments (parameters)"},
             {"<leader>sf", group = " Swap functions"},
         })
 
