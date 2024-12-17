@@ -101,5 +101,19 @@ return {
         }
 
         mason_lspconfig.setup_handlers(handlers)
+
+        lspconfig.nextflow_ls.setup({
+            capabilities = capabilities,
+            cmd = { 'java', '-jar', '/home/kgfb456/lsp/language-server/build/libs/language-server-all.jar' },
+            filetypes = { 'nextflow' },
+            root_dir = lspconfig.util.root_pattern('nextflow.config', '.git'),
+            settings = {
+                nextflow = {
+                    files = {
+                        exclude = { '.git', '.nf-test', 'work' },
+                    },
+                },
+            },
+        })
     end
 }
