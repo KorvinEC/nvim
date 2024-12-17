@@ -7,6 +7,7 @@ return {
         lualine.setup({
             options = {
                 theme = 'gruvbox_dark',
+                globalstatus = true,
             },
             sections = {
                 lualine_c = {
@@ -34,16 +35,19 @@ return {
             },
             inactive_sections = {
                 lualine_a = { 'mode' },
-                lualine_b = {
-                    {
-                        'filename',
-                        path = 1
-                    }
-                },
+                lualine_b = {{ 'filename', path = 1 }},
                 lualine_x = {},
             },
+            inactive_winbar = {
+                lualine_a = {{ "filename", path = 1 }},
+            },
             tabline = {
-                lualine_a = { "buffers" },
+                lualine_a = {
+                    {
+                        "buffers",
+                        mode = 4
+                    }
+                },
                 lualine_z = { "tabs" },
             },
         })
