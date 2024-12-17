@@ -17,7 +17,6 @@ return {
                 "ruff",
                 "lua_ls",
                 "bashls",
-                "groovyls",
                 "html",
                 "ts_ls",
                 "eslint",

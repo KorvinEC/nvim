@@ -64,6 +64,6 @@ opt.backspace = "indent,eol,start"
 
 vim.filetype.add {
     pattern = {
-        [".*%.nf"] = "nf"
+        [".*%.nf"] = "nextflow"
     }
 }

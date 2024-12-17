@@ -34,7 +34,6 @@ return {
                 "git_rebase",
                 "gitcommit",
                 "gitignore",
-                "groovy",
                 "jq",
             },
             sync_install = false,
@@ -177,6 +176,6 @@ return {
             {"<leader>sf", group = " Swap functions"},
         })
 
-        vim.treesitter.language.register('groovy', 'nf')
+        vim.treesitter.language.register('groovy', 'nextflow')
     end
 }
