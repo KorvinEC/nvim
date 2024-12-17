@@ -96,12 +96,6 @@ return {
                     },
                 })
             end,
-            ["groovyls"] = function ()
-                lspconfig["groovyls"].setup({
-                    filetypes = { "groovy", "nf" },
-                    cmd = { "groovy-language-server" }
-                })
-            end,
         }
 
         mason_lspconfig.setup_handlers(handlers)
