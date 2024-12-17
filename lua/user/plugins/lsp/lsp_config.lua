@@ -43,9 +43,6 @@ return {
                 opts.desc = "See available code actions"
                 keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 
-                opts.desc = "Smart rename"
-                keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-
                 opts.desc = "Show line diagnostics"
                 keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
@@ -58,13 +55,17 @@ return {
                 opts.desc = "Show documentation for what is under cursor"
                 keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-                opts.desc = "Restart LSP"
-                keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+                -- LSP functions
+
+                keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Smart rename" })
+                keymap.set("n", "<leader>lR", ":LspRestart<CR>", { desc = "Restart" })
+                keymap.set("n", "<leader>li", ":LspInfo<CR>", { desc = "Info" })
+                keymap.set("n", "<leader>lL", ":LspLog<CR>", { desc = "Log" })
 
                 local which_key = require("which-key")
 
                 which_key.add({
-                    { "<leader>r", group = " Lsp functions" }
+                    { "<leader>l", group = " Lsp functions" }
                 })
             end,
         })
