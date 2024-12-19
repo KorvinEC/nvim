@@ -99,6 +99,7 @@ return {
         local builtin = require('telescope.builtin')
 
         keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
+        keymap.set('n', '<leader>fr', builtin.registers, { desc = "Registers" })
         keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Old files" })
         keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
         keymap.set('n', '<leader>fc', builtin.current_buffer_fuzzy_find, { desc = "Current buffer fuzzy find" })
