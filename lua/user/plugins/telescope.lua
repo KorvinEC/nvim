@@ -84,9 +84,6 @@ return {
                         },
                     },
                 },
-                file_browser = {
-                    hijack_netrw = true,
-                }
             }
         })
 
@@ -112,10 +109,10 @@ return {
         keymap.set("n", "<leader>fd", function ()
             builtin.diagnostics({bufnr=0})
         end, { desc = "Current buffer diagnostics" })
-        keymap.set("n", "<leader>t", function()
+        keymap.set("n", "<leader>ft", function()
             telescope.extensions.file_browser.file_browser()
         end, { desc = "File browser" })
-        keymap.set("n", "<leader>T", function()
+        keymap.set("n", "<leader>fT", function()
             telescope.extensions.file_browser.file_browser({
                 path="%:p:h",
                 select_buffer=true,
