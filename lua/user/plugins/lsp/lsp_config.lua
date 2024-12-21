@@ -61,6 +61,7 @@ return {
                 keymap.set("n", "<leader>lR", ":LspRestart<CR>", { desc = "Restart" })
                 keymap.set("n", "<leader>li", ":LspInfo<CR>", { desc = "Info" })
                 keymap.set("n", "<leader>lL", ":LspLog<CR>", { desc = "Log" })
+                keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
 
                 local which_key = require("which-key")
 
