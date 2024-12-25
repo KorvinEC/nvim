@@ -20,6 +20,7 @@ return {
                 "html",
                 "ts_ls",
                 "eslint",
+                "taplo",
             },
         })
     end,
