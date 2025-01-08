@@ -2,7 +2,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
+        { "saghen/blink.cmp" },
         { "antosha417/nvim-lsp-file-operations", config = true },
         { "folke/lazydev.nvim" },
         { "folke/which-key.nvim" },
@@ -11,8 +11,6 @@ return {
         local lspconfig = require("lspconfig")
 
         local mason_lspconfig = require("mason-lspconfig")
-
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         local keymap = vim.keymap
 
@@ -72,7 +70,7 @@ return {
         })
 
         -- used to enable autocompletion (assign to every lsp server config)
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         local handlers = {
             -- default handler for installed servers
