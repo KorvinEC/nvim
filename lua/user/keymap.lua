@@ -25,5 +25,3 @@ keymap.set("n", "<C-b>x", "<cmd>bdelete<CR>")
 
 keymap.set("n", "<leader>ol", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 keymap.set("n", "<leader>om", "<cmd>Mason<CR>", { desc = "Open Mason" })
-
-keymap.set("n", "<C-s>", "S")
