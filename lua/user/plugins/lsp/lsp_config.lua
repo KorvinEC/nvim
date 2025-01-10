@@ -60,6 +60,9 @@ return {
         keymap.set("n", "<leader>li", ":LspInfo<CR>", { desc = "Info" })
         keymap.set("n", "<leader>lL", ":LspLog<CR>", { desc = "Log" })
         keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
+        keymap.set("n", "<leader>lh", function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end, { desc = "Inlay hints toggle" })
 
         local which_key = require("which-key")
 
