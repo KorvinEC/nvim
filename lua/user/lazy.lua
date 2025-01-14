@@ -20,8 +20,8 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { "rktjmp/lush.nvim" },
-    { import = "user.plugins",     opts = { colorscheme = "kanagawa-dragon" } },
-    { import = "user.plugins.lsp", opts = { colorscheme = "kanagawa-dragon" } }
+    { import = "user.plugins" },
+    { import = "user.plugins.lsp" }
   },
   -- automatically check for plugin updates
   checker = {

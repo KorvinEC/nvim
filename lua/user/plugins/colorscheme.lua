@@ -1,13 +1,9 @@
 return {
-  "rebelot/kanagawa.nvim",
+  "ellisonleao/gruvbox.nvim",
   priority = 1000,
   config = function()
-    local kanagawa = require("kanagawa")
-
-    kanagawa.setup({
-      theme = "wave",
-    })
-
-    vim.cmd("colorscheme kanagawa-dragon")
-  end
+    vim.o.background = "dark" -- or "light" for light mode
+    vim.cmd([[colorscheme gruvbox]])
+  end,
+  opts = ...
 }
