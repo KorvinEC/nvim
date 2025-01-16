@@ -27,8 +27,26 @@ return {
     snippets = { preset = 'luasnip' },
     keymap = {
       preset = 'enter',
-      ['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
-      ['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' },
+      ['<Tab>'] = {
+        function(cmp)
+          if not cmp.is_visible() and cmp.snippet_active() then
+            return cmp.snippet_forward()
+          end
+          return cmp.select_next()
+        end,
+        'select_next',
+        'fallback',
+      },
+      ['<S-Tab>'] = {
+        function(cmp)
+          if not cmp.is_visible() and cmp.snippet_active() then
+            return cmp.snippet_backward()
+          end
+          return cmp.select_prev()
+        end,
+        'select_prev',
+        'fallback',
+      },
 
       ['<C-l>'] = { 'snippet_forward', 'fallback' },
       ['<C-h>'] = { 'snippet_backward', 'fallback' },
