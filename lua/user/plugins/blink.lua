@@ -56,6 +56,18 @@ return {
     },
     sources = {
       default = { 'snippets', 'lsp', 'path', 'buffer' },
+      providers = {
+        lsp = {
+          score_offset = 20,
+        },
+        snippets = {
+          score_offset = 10,
+          min_keyword_length = 1,
+        },
+        buffer = {
+          min_keyword_length = 4,
+        },
+      }
     },
     completion = {
       list = {
@@ -72,9 +84,17 @@ return {
       menu = {
         draw = {
           columns = {
-            { "label", "label_description", "kind_icon", "kind", gap = 1 },
+            { "label",     "label_description", gap = 3 },
+            { "kind_icon", "kind",              "source_name", gap = 1 }
           },
           treesitter = { "lsp" },
+          components = {
+            source_name = {
+              width = { max = 30 },
+              text = function(ctx) return ctx.source_name end,
+              highlight = 'BlinkCmpLabel',
+            },
+          },
         },
       },
       documentation = {
@@ -87,5 +107,5 @@ return {
     },
     signature = { enabled = true }
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
 }
