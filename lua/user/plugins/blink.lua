@@ -55,10 +55,19 @@ return {
       ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
     sources = {
-      default = { 'snippets', 'lsp', 'path', 'buffer' },
+      default = { 'lsp', 'snippets', 'path', 'buffer' },
       providers = {
         lsp = {
-          score_offset = 20,
+          score_offset = 50,
+          transform_items = function(_, items)
+            for _, item in ipairs(items) do
+              if item.kind == require('blink.cmp.types').CompletionItemKind.Variable then
+                item.score_offset = item.score_offset + 10
+              end
+            end
+
+            return items
+          end
         },
         snippets = {
           score_offset = 10,
