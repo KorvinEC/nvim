@@ -78,5 +78,33 @@ return {
     }
 
     mason_lspconfig.setup_handlers(handlers)
+
+    vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
+    vim.cmd.highlight("default link LspInlayHint Comment")
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = "LspSetup_Inlayhints",
+      callback = function(args)
+        if not (args.data and args.data.client_id) then
+          return
+        end
+
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if not client then
+          vim.notify_once("LSP inlay hints attached failed: nil client.", vim.log.levels.ERROR)
+          return
+        end
+
+        if client.name == "zls" then
+          vim.g.zig_fmt_autosave = 1
+        end
+
+        if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end,
+    })
   end
 }
