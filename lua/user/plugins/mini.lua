@@ -1,5 +1,18 @@
 return {
   {
+    'echasnovski/mini.splitjoin',
+    version = '*',
+    config = function()
+      require('mini.splitjoin').setup({
+        mappings = {
+          toggle = 'J',
+          split = '',
+          join = '',
+        },
+      })
+    end
+  },
+  {
     'echasnovski/mini.files',
     version = '*',
     config = function()
