@@ -12,7 +12,7 @@ return {
         ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
         ["<C-p>"] = "actions.preview",
-        ["<C-c>"] = { "actions.close", mode = "n" },
+        ["q"] = { "actions.close", mode = "n" },
         ["<C-l>"] = "actions.refresh",
         ["<leader>u"] = { "actions.parent", mode = "n" },
         ["<leader>c"] = { "actions.open_cwd", mode = "n" },
@@ -24,6 +24,6 @@ return {
         ["g\\"] = { "actions.toggle_trash", mode = "n" },
       },
     })
-    vim.keymap.set("n", "<leader>t", "<cmd>Oil<CR>")
+    vim.keymap.set("n", "<leader>T", "<cmd>Oil<CR>")
   end
 }
