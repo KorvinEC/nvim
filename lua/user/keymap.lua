@@ -5,9 +5,6 @@ local keymap = vim.keymap
 keymap.set("n", "<C-_>", "gcc", { remap = true })
 keymap.set("v", "<C-_>", "gcc", { remap = true })
 
-keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-keymap.set("v", "K", ":m '>-2<CR>gv=gv")
-
 keymap.set("n", "J", "mzJ`z")
 
 keymap.set("n", "<C-d>", "<C-d>zz")
