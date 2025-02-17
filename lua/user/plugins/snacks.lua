@@ -27,13 +27,15 @@ return {
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
+    scroll = {
+      enabled = true,
+      animate = {
+        duration = { step = 2, total = 250 }
+      },
+    },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    animate = {
-      enabled = true,
-      duration = 1,
-    },
+    animate = { enabled = true, },
   },
   keys = {
     { "<leader><space>", function() Snacks.picker.smart() end,                desc = "Smart Find Files" },
