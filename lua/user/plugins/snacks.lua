@@ -42,7 +42,7 @@ return {
 
     { "<leader>ff",      function() Snacks.picker.files() end,                desc = "Find Files" },
     { "<leader>fs",      function() Snacks.picker.git_status() end,           desc = "Git Status" },
-    { "<leader>fb",      function() Snacks.picker.buffers() end,              desc = "Buffers" },
+    { "<leader>fb",      function() Snacks.picker.buffers({focus = "list"}) end,            desc = "Buffers" },
     { "<leader>fn",      function() Snacks.picker.notifications() end,        desc = "Notification History" },
     { "<leader>fh",      function() Snacks.picker.command_history() end,      desc = "Command History" },
     { '<leader>fr"',     function() Snacks.picker.registers() end,            desc = "Registers" },
