@@ -53,12 +53,6 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
-            ["ad"] = { query = "@assignment.outer", desc = "Select outer definition (assignment)" },
-            ["id"] = { query = "@assignment.inner", desc = "Select inner definition (assignment)" },
-
-            ["ld"] = { query = "@assignment.lhs", desc = "Select left side of an definition (assignment)" },
-            ["rd"] = { query = "@assignment.rhs", desc = "Select right side of an definition (assignment)" },
-
             ["aa"] = { query = "@parameter.outer", desc = "Select outer argument (parameter)" },
             ["ia"] = { query = "@parameter.inner", desc = "Select inner argument (parameter)" },
 
@@ -71,17 +65,14 @@ return {
             ["ic"] = { query = "@call.inner", desc = "Select inner call" },
             ["ac"] = { query = "@call.outer", desc = "Select outer call" },
 
-            ["ii"] = { query = "@conditional.inner", desc = "Select inner conditional" },
-            ["ai"] = { query = "@conditional.outer", desc = "Select outer conditional" },
+            ["ik"] = { query = "@conditional.inner", desc = "Select inner conditional" },
+            ["ak"] = { query = "@conditional.outer", desc = "Select outer conditional" },
 
-            ["il"] = { query = "@loop.inner", desc = "Select inner loop" },
-            ["al"] = { query = "@loop.outer", desc = "Select outer loop" },
+            ["ij"] = { query = "@loop.inner", desc = "Select inner loop" },
+            ["aj"] = { query = "@loop.outer", desc = "Select outer loop" },
 
             ["i/"] = { query = "@comment.inner", desc = "Select inner comment" },
             ["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
-
-            ["ib"] = { query = "@block.inner", desc = "Select inner block" },
-            ["ab"] = { query = "@block.outer", desc = "Select outer block" },
           },
           selection_modes = {
             ['@parameter.outer'] = 'v',
@@ -100,44 +91,35 @@ return {
         },
         move = {
           enable = true,
-          set_jumps = true,           -- whether to set jumps in the jumplist
+          set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
-            ["]d"] = { query = "@assignment.outer", desc = "Next definition (assignment) start" },
             ["]a"] = { query = "@parameter.outer", desc = "Next argument (parameter) start" },
             ["]f"] = { query = "@function.outer", desc = "Next function start" },
             ["]o"] = { query = "@class.outer", desc = "Next object (class) start" },
             ["]c"] = { query = "@call.outer", desc = "Next call start" },
-            ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
-            ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+            ["]k"] = { query = "@conditional.outer", desc = "Next conditional start" },
+            ["]j"] = { query = "@loop.outer", desc = "Next loop start" },
             ["]/"] = { query = "@comment.outer", desc = "Next comment start" },
-            ["]b"] = { query = "@block.outer", desc = "Next block start" },
-            ["]s"] = { query = "@scope", desc = "Next scope start" },
             ["]z"] = { query = "@fold", desc = "Next fold start" },
           },
           goto_next_end = {
-            ["]D"] = { query = "@assignment.outer", desc = "Next definition (assignment) end" },
             ["]A"] = { query = "@parameter.outer", desc = "Next argument (argument) end" },
             ["]F"] = { query = "@function.outer", desc = "Next function end" },
             ["]O"] = { query = "@class.outer", desc = "Next object (class) end" },
             ["]C"] = { query = "@call.outer", desc = "Next call end" },
-            ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
-            ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+            ["]K"] = { query = "@conditional.outer", desc = "Next conditional end" },
+            ["]J"] = { query = "@loop.outer", desc = "Next loop end" },
             ["]?"] = { query = "@comment.outer", desc = "Next comment end" },
-            ["]B"] = { query = "@block.outer", desc = "Next block end" },
-            ["]S"] = { query = "@scope", desc = "Next scope end" },
             ["]Z"] = { query = "@fold", desc = "Next fold end" },
           },
           goto_previous_start = {
-            ["[d"] = { query = "@assignment.outer", desc = "Prev definition (assignment) start" },
             ["[a"] = { query = "@parameter.outer", desc = "Prev argument (parameter) start" },
             ["[f"] = { query = "@function.outer", desc = "Prev function start" },
             ["[o"] = { query = "@class.outer", desc = "Prev class (object) start" },
             ["[c"] = { query = "@call.outer", desc = "Prev call start" },
-            ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
-            ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+            ["[k"] = { query = "@conditional.outer", desc = "Prev conditional start" },
+            ["[j"] = { query = "@loop.outer", desc = "Prev loop start" },
             ["[/"] = { query = "@comment.outer", desc = "Prev comment start" },
-            ["[b"] = { query = "@block.outer", desc = "Prev block start" },
-            ["[s"] = { query = "@scope", desc = "Prev scope start" },
             ["[z"] = { query = "@fold", desc = "Prev fold start" },
           },
           goto_previous_end = {
@@ -146,11 +128,9 @@ return {
             ["[F"] = { query = "@function.outer", desc = "Prev function end" },
             ["[O"] = { query = "@class.outer", desc = "Prev object (classclass) end" },
             ["[C"] = { query = "@call.outer", desc = "Prev call end" },
-            ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
-            ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+            ["[K"] = { query = "@conditional.outer", desc = "Prev conditional end" },
+            ["[J"] = { query = "@loop.outer", desc = "Prev loop end" },
             ["[?"] = { query = "@comment.outer", desc = "Prev comment end" },
-            ["[B"] = { query = "@block.outer", desc = "Prev block end" },
-            ["[S"] = { query = "@scope", desc = "Prev scope end" },
             ["[Z"] = { query = "@fold", desc = "Prev fold end" },
           },
         },
