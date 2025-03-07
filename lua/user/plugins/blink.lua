@@ -58,7 +58,7 @@ return {
       default = { 'lsp', 'snippets', 'path', 'buffer' },
       providers = {
         lsp = {
-          score_offset = 50,
+          score_offset = 900,
           transform_items = function(_, items)
             for _, item in ipairs(items) do
               if item.kind == require('blink.cmp.types').CompletionItemKind.Variable then
@@ -76,7 +76,7 @@ return {
         buffer = {
           min_keyword_length = 4,
         },
-      }
+      },
     },
     completion = {
       list = {
