@@ -67,3 +67,6 @@ vim.filetype.add {
     [".*%.nf"] = "nextflow"
   }
 }
+
+opt.spelllang = "en"
+opt.spell = true
