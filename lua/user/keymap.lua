@@ -5,14 +5,6 @@ local keymap = vim.keymap
 keymap.set("n", "<C-_>", "gcc", { remap = true })
 keymap.set("v", "<C-_>", "gcc", { remap = true })
 
-keymap.set("n", "J", "mzJ`z")
-
-keymap.set("n", "<C-d>", "<C-d>zz")
-keymap.set("n", "<C-u>", "<C-u>zz")
-
-keymap.set("n", "n", "nzzzv")
-keymap.set("n", "N", "Nzzzv")
-
 keymap.set("n", "<C-b>k", "<cmd>bnext<CR>")
 keymap.set("n", "<C-b>j", "<cmd>bprevious<CR>")
 keymap.set("n", "<C-b>h", "<cmd>bfirst<CR>")
