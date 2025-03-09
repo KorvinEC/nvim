@@ -35,6 +35,7 @@ return {
         "gitcommit",
         "gitignore",
         "jq",
+        "comment",
       },
       sync_install = false,
       highlight = { enable = true },
