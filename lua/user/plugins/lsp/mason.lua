@@ -22,6 +22,7 @@ return {
         "eslint",
         "taplo",
         "dockerls",
+        "jsonls"
       },
     })
   end,
