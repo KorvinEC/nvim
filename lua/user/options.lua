@@ -70,3 +70,4 @@ vim.filetype.add {
 
 opt.spelllang = "en"
 opt.spell = true
+opt.spelloptions = "camel"
