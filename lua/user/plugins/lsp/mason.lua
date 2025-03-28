@@ -22,7 +22,8 @@ return {
         "eslint",
         "taplo",
         "dockerls",
-        "jsonls"
+        "jsonls",
+        "rust_analyzer"
       },
     })
   end,

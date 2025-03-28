@@ -36,6 +36,7 @@ return {
         "gitignore",
         "jq",
         "comment",
+        "rust"
       },
       sync_install = false,
       highlight = { enable = true },
