@@ -38,8 +38,6 @@ return {
     animate = { enabled = true, },
   },
   keys = {
-    { "<leader><space>", function() Snacks.picker.smart() end,                     desc = "Smart Find Files" },
-
     { "<leader>ff",      function() Snacks.picker.files() end,                     desc = "Find Files" },
     { "<leader>fs",      function() Snacks.picker.git_status() end,                desc = "Git Status" },
     { "<leader>fb",      function() Snacks.picker.buffers({ focus = "list" }) end, desc = "Buffers" },
