@@ -9,6 +9,7 @@ return {
     spec = {
       { "<leader>z", group = " Trouble toggles" },
       { "<leader>o", group = " Open menu" },
+      { "<leader>n", group = " Avante LLM" }
     },
   },
 }
