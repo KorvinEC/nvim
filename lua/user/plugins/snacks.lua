@@ -47,6 +47,7 @@ return {
     { "<leader>fg",  function() Snacks.picker.grep() end,                      desc = "Grep" },
     { "<leader>fw",  function() Snacks.picker.grep_word() end,                 desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>f/",  function() Snacks.picker.help() end,                      desc = "Help Pages" },
+    { "<leader>fl",  function() Snacks.picker.lines() end,                     desc = "Jump to highlighted" },
 
     { "<leader>og",  function() Snacks.lazygit() end,                          desc = "Open Lazygit" },
 
