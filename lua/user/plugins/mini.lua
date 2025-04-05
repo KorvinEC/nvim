@@ -60,6 +60,12 @@ return {
           mini_files.reveal_cwd()
         end
       )
+
+      local which_key = require("which-key")
+
+      which_key.add({
+        { "<leader>t",  group = "Mini files" },
+      })
     end
   },
   {
