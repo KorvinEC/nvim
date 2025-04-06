@@ -64,9 +64,8 @@ return {
         })
       end,
     })
-
     -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     local handlers = {
       -- default handler for installed servers
