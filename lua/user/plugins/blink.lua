@@ -116,7 +116,6 @@ local keymap_config = {
   ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
 }
 
-
 return {
   'saghen/blink.cmp',
   dependencies = {
@@ -182,6 +181,7 @@ return {
       accept = {
         auto_brackets = {
           enabled = true,
+          kind_resolution = {},
         },
       },
       menu = {
