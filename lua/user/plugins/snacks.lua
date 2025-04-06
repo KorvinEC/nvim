@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  ---@module 'snacks'
   ---@type snacks.Config
   opts = {
     -- your configuration comes here
@@ -38,7 +39,7 @@ return {
     animate = { enabled = true, },
   },
   keys = {
-    { "<leader>ff",  function() Snacks.picker.files() end,                     desc = "Find Files" },
+    { "<leader>ff",  function() Snacks.picker.files({ hidden = true }) end,    desc = "Find Files" },
     { "<leader>fs",  function() Snacks.picker.git_status() end,                desc = "Git Status" },
     { "<leader>fb",  function() Snacks.picker.buffers({ focus = "list" }) end, desc = "Buffers" },
     { "<leader>fn",  function() Snacks.picker.notifications() end,             desc = "Notification History" },
