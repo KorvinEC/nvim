@@ -26,6 +26,7 @@ return {
         "rust_analyzer",
         "cssls",
         "tailwindcss",
+        "clangd"
       },
     })
   end,
