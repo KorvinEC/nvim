@@ -23,7 +23,9 @@ return {
         "taplo",
         "dockerls",
         "jsonls",
-        "rust_analyzer"
+        "rust_analyzer",
+        "cssls",
+        "tailwindcss",
       },
     })
   end,
