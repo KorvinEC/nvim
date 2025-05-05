@@ -24,7 +24,9 @@ return {
     'echasnovski/mini.pairs',
     version = '*',
     config = function()
-      require('mini.pairs').setup()
+      require('mini.pairs').setup({
+        modes = { insert = true, command = true, terminal = false }
+      })
     end
   },
   {
@@ -58,7 +60,7 @@ return {
       local which_key = require("which-key")
 
       which_key.add({
-        { "<leader>t",  group = "Mini files" },
+        { "<leader>t", group = "Mini files" },
       })
     end
   },
