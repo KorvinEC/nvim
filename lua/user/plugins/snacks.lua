@@ -36,7 +36,8 @@ return {
     },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    animate = { enabled = true, },
+    animate = { enabled = true },
+    bufdelete = { enabled = true }
   },
   keys = {
     { "<leader>ff",  function() Snacks.picker.files({ hidden = true }) end,    desc = "Find Files" },
@@ -49,6 +50,9 @@ return {
     { "<leader>fw",  function() Snacks.picker.grep_word() end,                 desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>f/",  function() Snacks.picker.help() end,                      desc = "Help Pages" },
     { "<leader>fl",  function() Snacks.picker.lines() end,                     desc = "Jump to highlighted" },
+
+    { "<leader>bd",  function() Snacks.bufdelete() end,                        desc = "Delete buffer" },
+    { "<leader>bD",  function() Snacks.bufdelete.other() end,                  desc = "Delete all other buffers" },
 
     { "<leader>og",  function() Snacks.lazygit() end,                          desc = "Open Lazygit" },
 
