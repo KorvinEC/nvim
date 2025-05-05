@@ -31,13 +31,7 @@ return {
     'echasnovski/mini.splitjoin',
     version = '*',
     config = function()
-      require('mini.splitjoin').setup({
-        mappings = {
-          toggle = 'J',
-          split = '',
-          join = '',
-        },
-      })
+      require('mini.splitjoin').setup()
     end
   },
   {
