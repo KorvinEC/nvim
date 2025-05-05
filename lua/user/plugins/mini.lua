@@ -72,5 +72,14 @@ return {
         require("mini.ai").setup()
       end
     },
+  },
+  {
+    {
+      'echasnovski/mini.bracketed',
+      version = '*',
+      config = function()
+        require("mini.bracketed").setup()
+      end
+    },
   }
 }
