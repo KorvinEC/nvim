@@ -18,10 +18,6 @@ return {
     { "folke/which-key.nvim" },
   },
   config = function()
-    local lspconfig = require("lspconfig")
-
-    local mason_lspconfig = require("mason-lspconfig")
-
     local keymap = vim.keymap
 
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -31,14 +27,11 @@ return {
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
 
-        opts.desc = "See available code actions"
-        keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+        keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, { desc = "See available code actions" }) -- see available code actions, in visual mode will apply to selection
 
-        opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+        keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show line diagnostics" })             -- show diagnostics for line
 
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+        keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under cursor" })       -- show documentation for what is under cursor
 
         -- LSP functions
 
@@ -47,9 +40,12 @@ return {
         keymap.set("n", "<leader>li", ":LspInfo<CR>", { desc = "Info" })
         keymap.set("n", "<leader>lL", ":LspLog<CR>", { desc = "Log" })
         keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
-        keymap.set("n", "<leader>lh", function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end, { desc = "Inlay hints toggle" })
+        keymap.set("n", "<leader>lh",
+          function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end,
+          { desc = "Inlay hints toggle" }
+        )
 
         local which_key = require("which-key")
 
@@ -58,19 +54,6 @@ return {
         })
       end,
     })
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    local handlers = {
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-    }
-
-    mason_lspconfig.setup_handlers(handlers)
 
     vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
     vim.cmd.highlight("default link LspInlayHint Comment")
@@ -94,7 +77,7 @@ return {
           vim.g.zig_fmt_autosave = 1
         end
 
-        if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+        if client.server_capabilities.inlayHintProvider or client.supports_method("textDocument/inlayHint") then
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
       end,
