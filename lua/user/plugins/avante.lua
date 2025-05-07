@@ -9,6 +9,7 @@ return {
     provider = "claude",
     mappings = {
       ask = "<leader>na",
+      new_ask = "<leader>nn",
       edit = "<leader>ne",
       refresh = "<leader>nr",
       focus = "<leader>nf",
@@ -76,5 +77,5 @@ return {
       ft = { "markdown", "Avante" },
     },
     "ravitemer/mcphub.nvim"
-  },
+  }
 }
