@@ -81,5 +81,14 @@ return {
         require("mini.bracketed").setup()
       end
     },
+  },
+  {
+    {
+      'echasnovski/mini.surround',
+      version = '*',
+      config = function()
+        require("mini.surround").setup()
+      end
+    },
   }
 }
