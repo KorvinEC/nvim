@@ -140,6 +140,9 @@ return {
       end
     },
     { 'ribru17/blink-cmp-spell' },
+    { 'Kaiser-Yang/blink-cmp-avante' },
+    { "yetone/avante.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
   },
   version = '*',
   ---@module 'blink.cmp'
@@ -163,12 +166,19 @@ return {
     snippets = { preset = 'luasnip' },
     keymap = keymap_config,
     sources = {
-      default = { 'spell', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'avante', 'spell', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         lsp = lsp_config,
         snippets = snippets_config,
         buffer = { min_keyword_length = 4 },
         spell = spell_config,
+        avante = {
+          module = 'blink-cmp-avante',
+          name = 'Avante',
+          opts = {
+            -- options for blink-cmp-avante
+          }
+        }
       },
     },
     completion = {
