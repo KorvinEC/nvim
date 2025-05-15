@@ -5,16 +5,18 @@ return {
     local lualine = require("lualine")
 
     lualine.setup({
+      extensions = { 'oil', 'mason', 'lazy', 'quickfix', 'trouble' },
       options = {
         theme = 'gruvbox_dark',
         globalstatus = true,
+        ignore_focus = { "snacks_picker_input", "snacks_terminal", "mcphub", "minifiles" },
       },
       sections = {
         lualine_c = {
           {
             'filename',
-            file_status = true,     -- Displays file status (readonly status, modified status)
-            newfile_status = false, -- Display new file status (new file means no write after created)
+            file_status = true,    -- Displays file status (readonly status, modified status)
+            newfile_status = true, -- Display new file status (new file means no write after created)
             path = 1,
             -- 0: Just the filename
             -- 1: Relative path
@@ -25,12 +27,12 @@ return {
             -- Shortens path to leave 40 spaces in the window
             -- for other components. (terrible name, any suggestions?)
             symbols = {
-              modified = '[+]',      -- Text to show when the file is modified.
-              readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+              modified = '[󰻭]', -- Text to show when the file is modified.
+              readonly = '[]', -- Text to show when the file is non-modifiable or readonly.
               unnamed = '[No Name]', -- Text to show for unnamed buffers.
-              newfile = '[New]',     -- Text to show for newly created file before first write
+              newfile = '[New]', -- Text to show for newly created file before first write
             }
-          }
+          },
         },
         lualine_x = {
           'lsp_status',
@@ -38,14 +40,6 @@ return {
           'fileformat',
           'filetype'
         },
-      },
-      inactive_sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { { 'filename', path = 1 } },
-        lualine_x = {},
-      },
-      inactive_winbar = {
-        lualine_a = { { "filename", path = 1 } },
       },
     })
   end
