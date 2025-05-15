@@ -10,7 +10,7 @@ return {
     { "<c-s>",     mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
   },
   config = function()
-    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#282828", bg = "#cc241d" })
+    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#00FF46", bg = "#cc241d" })
   end,
   specs = {
     {
