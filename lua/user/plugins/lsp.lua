@@ -46,6 +46,7 @@ return {
     local on_attach = function(client, bufnr)
       -- Enable completion triggered by <c-x><c-o>
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr, desc = "Hover" })
+      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show line diagnostics" })
       vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
         { noremap = true, silent = true, buffer = bufnr, desc = "Signature help" })
       vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename,
@@ -58,7 +59,7 @@ return {
 
       vim.keymap.set("n", "<space>lR", function()
         vim.lsp.stop_client(vim.lsp.get_clients())
-        vim.cmd("edit")
+        vim.cmd("edit", bufnr)
       end, { buffer = bufnr, desc = "Restart" })
     end
 
