@@ -10,7 +10,7 @@ return {
       { "<leader>z", group = " Trouble toggles" },
       { "<leader>o", group = " Open menu" },
       { "<leader>n", group = " Avante LLM" },
-      { "<leader>f", group = " Picker (Telescope)" }
+      { "<leader>f", group = " Picker" }
     },
   },
 }
