@@ -1,7 +1,7 @@
 return {
   "folke/flash.nvim",
-  event = "VeryLazy",
-  opts = {},
+  event = { "VeryLazy" },
+  dependencies = { "folke/snacks.nvim" },
   keys = {
     { "<leader>j", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
     { "<leader>J", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -9,9 +9,6 @@ return {
     { "R",         mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     { "<c-s>",     mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
   },
-  config = function()
-    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#00FF46", bg = "#cc241d" })
-  end,
   specs = {
     {
       "folke/snacks.nvim",
@@ -49,4 +46,23 @@ return {
       },
     },
   },
+  config = function()
+    local colors = require("gruvbox").palette
+
+    vim.api.nvim_set_hl(0, "FlashLabelHighlight", {
+      fg = colors.bright_aqua,
+      bg = colors.dark_aqua_hard
+    })
+
+    require('flash').setup({
+      label = {
+        ---@type fun(opts:Flash.Format): string[][]
+        format = function(opts)
+          return {
+            { opts.match.label, "FlashLabelHighlight" }
+          }
+        end
+      },
+    })
+  end
 }

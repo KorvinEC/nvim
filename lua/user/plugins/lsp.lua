@@ -1,3 +1,53 @@
+---@param buffer_number integer
+local lsp_restart = function(buffer_number)
+  -- Store the buffer information before stopping clients
+  local bufnr = buffer_number
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  -- We don't need filetype anymore since we're using BufEnter instead of FileType
+
+  -- Get all clients attached to the buffer
+  local clients = vim.lsp.get_clients({ buffer = buffer_number })
+  local client_names = {}
+
+  -- Store client names for later reattachment
+  for _, client in ipairs(clients) do
+    table.insert(client_names, client.name)
+    vim.lsp.stop_client(client.id, true)
+  end
+
+  local timer = assert(vim.uv.new_timer())
+
+  timer:start(500, 0, function()
+    vim.schedule(function()
+      -- Reload the current buffer
+      vim.cmd("edit!")
+
+      -- Force LSP reattachment for the current buffer
+      if #client_names > 0 then
+        vim.defer_fn(function()
+          -- Trigger LSP attachment by emitting a BufEnter event
+          vim.api.nvim_exec_autocmds("BufEnter", {
+            buffer = bufnr,
+          })
+
+          -- For some LSP servers, we might need to manually trigger attachment
+          for _, client_name in ipairs(client_names) do
+            -- Try to restart the specific client for this buffer
+            local ok, _ = pcall(function()
+              vim.cmd("LspStart " .. client_name)
+            end)
+
+            if ok then
+              vim.notify("Reattached " .. client_name .. " to " .. vim.fn.fnamemodify(bufname, ":t"),
+                vim.log.levels.INFO)
+            end
+          end
+        end, 100)
+      end
+    end)
+  end)
+end
+
 return {
   "williamboman/mason.nvim",
   dependencies = {
@@ -42,7 +92,7 @@ return {
     })
 
     ---@param client vim.lsp.Client
-    ---@param bufnr boolean|integer
+    ---@param bufnr integer
     local on_attach = function(client, bufnr)
       -- Enable completion triggered by <c-x><c-o>
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr, desc = "Hover" })
@@ -57,10 +107,7 @@ return {
         vim.lsp.buf.format({ async = true })
       end, { noremap = true, silent = true, buffer = bufnr, desc = "Format" })
 
-      vim.keymap.set("n", "<space>lR", function()
-        vim.lsp.stop_client(vim.lsp.get_clients())
-        vim.cmd("edit", bufnr)
-      end, { buffer = bufnr, desc = "Restart" })
+      vim.keymap.set("n", "<space>lR", function() lsp_restart(bufnr) end, { buffer = bufnr, desc = "Restart" })
     end
 
     vim.lsp.config("*", {

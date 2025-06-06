@@ -88,6 +88,8 @@ return {
       version = '*',
       config = function()
         require("mini.surround").setup()
+
+        vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
       end
     },
   }

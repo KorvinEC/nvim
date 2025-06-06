@@ -1,60 +1,27 @@
+--- TODO: add usage of trigger symbol, but need to investigate how to delete this symbol from input char
+local trigger_symbol = { "@" }
+
 ---@type blink.cmp.SourceProviderConfig
 local lsp_config = {
-  transform_items = function(_, items)
+  transform_items = function(context, items)
+    local types = require('blink.cmp.types')
     for _, item in ipairs(items) do
-      if item.kind == require('blink.cmp.types').CompletionItemKind.Variable then
-        item.score_offset = item.score_offset * 2
+      if item.kind == types.CompletionItemKind.Variable
+          or item.kind == types.CompletionItemKind.EnumMember
+      then
+        item.score_offset = item.score_offset + 100
       end
     end
     return items
   end,
 }
 
-local trigger_text = "@"
-
---- NOTE: Taken from https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/blink-cmp.lua
 ---@type blink.cmp.SourceProviderConfig
 local snippets_config = {
   min_keyword_length = 1,
-  -- Only show snippets if I type the trigger_text characters, so
-  -- to expand the "bash" snippet, if the trigger_text is "@" I have to
-  should_show_items = function(_, _)
-    local col = vim.api.nvim_win_get_cursor(0)[2]
-    local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-    -- NOTE: remember that `trigger_text` is modified at the top of the file
-    return before_cursor:match(trigger_text .. "%w*$") ~= nil
-  end,
-  -- After accepting the completion, delete the trigger_text characters
-  -- from the final inserted text
-  -- Modified transform_items function based on suggestion by `synic` so
-  -- that the luasnip source is not reloaded after each transformation
-  -- https://github.com/linkarzu/dotfiles-latest/discussions/7#discussion-7849902
-  -- NOTE: I also tried to add the "@" prefix to all of the snippets loaded from
-  -- friendly-snippets in the luasnip.lua file, but I was unable to do
-  -- so, so I still have to use the transform_items here
-  -- This removes the "@" only for the friendly-snippets snippets
-  transform_items = function(_, items)
-    local line = vim.api.nvim_get_current_line()
-    local col = vim.api.nvim_win_get_cursor(0)[2]
-    local before_cursor = line:sub(1, col)
-    local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-    if start_pos then
-      for _, item in ipairs(items) do
-        if not item.trigger_text_modified then
-          ---@diagnostic disable-next-line: inject-field
-          item.trigger_text_modified = true
-          item.textEdit = {
-            newText = item.insertText or item.label,
-            range = {
-              start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
-              ["end"] = { line = vim.fn.line(".") - 1, character = end_pos + 0 },
-            },
-          }
-        end
-      end
-    end
-    return items
-  end,
+  should_show_items = function(context, _)
+    return context.trigger.initial_kind ~= 'trigger_character'
+  end
 }
 
 ---@type blink.cmp.SourceProviderConfig
@@ -84,6 +51,41 @@ local spell_config = {
   },
 }
 
+---@type blink.cmp.CmdlineConfig
+local cmdline_config = {
+  sources = function()
+    local type = vim.fn.getcmdtype()
+    -- Search forward and backward
+    if type == '/' or type == '?' then return { 'buffer' } end
+    -- Commands
+    if type == ':' or type == '@' then return { 'cmdline' } end
+    return {}
+  end,
+  ---@type blink.cmp.KeymapConfig
+  keymap = {
+    preset = 'cmdline',
+    ["<CR>"] = {
+      function(cmp)
+        if cmp.get_selected_item() then
+          return cmp.select_and_accept()
+        end
+      end,
+      'fallback'
+    },
+    ["<S-CR>"] = {
+      function(cmp)
+        if cmp.get_selected_item() then
+          return cmp.select_accept_and_enter()
+        end
+      end,
+      'fallback'
+    }
+  },
+  completion = {
+    menu = { auto_show = true },
+    list = { selection = { preselect = false, auto_insert = true } }
+  }
+}
 
 ---@type blink.cmp.KeymapConfig
 local keymap_config = {
@@ -108,6 +110,7 @@ local keymap_config = {
     'select_prev',
     'fallback',
   },
+  ['<C-y>'] = { 'select_and_accept' },
 
   ['<C-l>'] = { 'snippet_forward', 'fallback' },
   ['<C-h>'] = { 'snippet_backward', 'fallback' },
@@ -120,29 +123,12 @@ return {
   'saghen/blink.cmp',
   dependencies = {
     { 'rafamadriz/friendly-snippets' },
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
-      dependencies = {
-        { "rafamadriz/friendly-snippets" },
-      },
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-
-        local luasnip = require("luasnip")
-
-        luasnip.filetype_extend("javascript", { "javascriptreact", "typescript", "typecriptreact" })
-        luasnip.filetype_extend("typescript", { "javascript" })
-        luasnip.filetype_extend("typescriptreact", { "javascript", "html" })
-        luasnip.filetype_extend("javascriptreact", { "javascript", "html" })
-        luasnip.filetype_extend("html", { "javascriptreact", "typecriptreact" })
-      end
-    },
+    { "L3MON4D3/LuaSnip" },
     { 'ribru17/blink-cmp-spell' },
     { 'Kaiser-Yang/blink-cmp-avante' },
     { "yetone/avante.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "xzbdmw/colorful-menu.nvim", }
   },
   version = '*',
   ---@module 'blink.cmp'
@@ -166,11 +152,16 @@ return {
     snippets = { preset = 'luasnip' },
     keymap = keymap_config,
     sources = {
-      default = { 'avante', 'spell', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lazydev', 'avante', 'spell', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         lsp = lsp_config,
         snippets = snippets_config,
-        buffer = { min_keyword_length = 4 },
+        buffer = {
+          min_keyword_length = function(context)
+            if context.mode == "cmdline" then return 1 end
+            return 4
+          end
+        },
         spell = spell_config,
         avante = {
           module = 'blink-cmp-avante',
@@ -178,7 +169,21 @@ return {
           opts = {
             -- options for blink-cmp-avante
           }
-        }
+        },
+        path = {
+          opts = {
+            get_cwd = function(_)
+              return vim.fn.getcwd()
+            end,
+          },
+        },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
+
       },
     },
     completion = {
@@ -191,14 +196,15 @@ return {
       accept = {
         auto_brackets = {
           enabled = true,
-          kind_resolution = {},
+          kind_resolution = nil,
+          semantic_token_resolution = nil,
         },
       },
       menu = {
         draw = {
           columns = {
-            { "label",     "label_description", gap = 3 },
-            { "kind_icon", "kind",              "source_name", gap = 1 }
+            { "kind_icon", "label",       "label_description", gap = 1 },
+            { "kind",      "source_name", gap = 1 }
           },
           treesitter = { "lsp" },
           components = {
@@ -206,6 +212,14 @@ return {
               width = { max = 30 },
               text = function(ctx) return ctx.source_name end,
               highlight = 'BlinkCmpLabel',
+            },
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
             },
           },
         },
@@ -218,8 +232,8 @@ return {
         enabled = true
       },
     },
-    signature = { enabled = true }
-
+    signature = { enabled = true },
+    cmdline = cmdline_config,
   },
   opts_extend = { "sources.default" },
 }
