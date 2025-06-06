@@ -36,7 +36,8 @@ return {
         "gitignore",
         "jq",
         "comment",
-        "rust"
+        "rust",
+        "glsl"
       },
       sync_install = false,
       highlight = { enable = true },
@@ -75,6 +76,9 @@ return {
 
             ["i/"] = { query = "@comment.inner", desc = "Select inner comment" },
             ["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
+
+            ["au"] = "@type.outer",
+            ["iu"] = "@type.inner",
           },
           selection_modes = {
             ['@parameter.outer'] = 'v',
