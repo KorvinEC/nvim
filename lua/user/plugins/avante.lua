@@ -6,7 +6,11 @@ return {
   build = "make",
   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   opts = {
-    provider = "claude",
+    providers = {
+      claude = {
+        model = "claude-3-5-haiku-20241022",
+      },
+    },
     mappings = {
       ask = "<leader>na",
       new_ask = "<leader>nn",
@@ -28,16 +32,35 @@ return {
       select_model = "<leader>n?",
       select_history = "<leader>nh",
     },
+    windows = {
+      edit = {
+        border = "rounded"
+      },
+      ask = {
+        border = "rounded"
+      }
+    },
     web_search_engine = {
       provider = "tavily",
       proxy = nil,
     },
-    claude = {
-      timeout = 5000,
+    disabled_tools = {
+      "list_files", -- Built-in file operations
+      "search_files",
+      "read_file",
+      "create_file",
+      "rename_file",
+      "delete_file",
+      "create_dir",
+      "rename_dir",
+      "delete_dir",
+      "bash", -- Built-in terminal access
     },
+    -- system_prompt as function ensures LLM always has latest MCP server state
+    -- This is evaluated for every message, even in existing chats
     system_prompt = function()
       local hub = require("mcphub").get_hub_instance()
-      return hub:get_active_servers_prompt()
+      return hub:get_active_servers_prompt() or ""
     end,
     -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
     custom_tools = function()
