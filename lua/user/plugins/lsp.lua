@@ -91,13 +91,12 @@ return {
       },
     })
 
-    ---@param client vim.lsp.Client
     ---@param bufnr integer
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       -- Enable completion triggered by <c-x><c-o>
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr, desc = "Hover" })
       vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show line diagnostics" })
-      vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+      vim.keymap.set('n', 'gk', vim.lsp.buf.signature_help,
         { noremap = true, silent = true, buffer = bufnr, desc = "Signature help" })
       vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename,
         { noremap = true, silent = true, buffer = bufnr, desc = "Rename" })
