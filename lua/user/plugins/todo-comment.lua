@@ -1,6 +1,8 @@
 return {
   "folke/todo-comments.nvim",
+  event = { "BufEnter" },
   keys = {
+    ---@module "snacks"
     { "<leader>fc", function() Snacks.picker.todo_comments() end, desc = "Todo" },
   },
   opts = {
