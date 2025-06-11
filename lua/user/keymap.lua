@@ -7,3 +7,5 @@ keymap.set("n", "<leader>om", "<cmd>Mason<CR>", { desc = "Open Mason" })
 
 keymap.set("n", "<leader>w", "<cmd>write<CR>", { desc = "Write file" })
 keymap.set("n", "<leader>W", "<cmd>write!<CR>", { desc = "Force write file" })
+
+keymap.set('n', 'gl', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-l><CR>', { desc = "Refresh screen" })
