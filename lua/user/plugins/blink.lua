@@ -1,7 +1,7 @@
 --- TODO: add usage of trigger symbol, but need to investigate how to delete this symbol from input char
 local trigger_symbol = { "@" }
 
----@type blink.cmp.SourceProviderConfig
+---@type blink.cmp.SourceProviderConfigPartial
 local lsp_config = {
   transform_items = function(context, items)
     local types = require('blink.cmp.types')
@@ -16,9 +16,8 @@ local lsp_config = {
   end,
 }
 
----@type blink.cmp.SourceProviderConfig
+---@type blink.cmp.SourceProviderConfigPartial
 local snippets_config = {
-  min_keyword_length = 1,
   should_show_items = function(context, _)
     return context.trigger.initial_kind ~= 'trigger_character'
   end
@@ -122,7 +121,6 @@ local keymap_config = {
 return {
   'saghen/blink.cmp',
   dependencies = {
-    { 'rafamadriz/friendly-snippets' },
     { "L3MON4D3/LuaSnip" },
     { 'ribru17/blink-cmp-spell' },
     { 'Kaiser-Yang/blink-cmp-avante' },
@@ -145,14 +143,15 @@ return {
         end,
         -- This is the normal default order, which we fall back to
         'score',
-        'kind',
-        'label',
+        'sort_text',
       },
+      use_frecency = true,
+      use_proximity = true,
     },
     snippets = { preset = 'luasnip' },
     keymap = keymap_config,
     sources = {
-      default = { 'lazydev', 'avante', 'spell', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lazydev', 'avante', 'spell', 'lsp', 'buffer', 'snippets', 'path' },
       providers = {
         lsp = lsp_config,
         snippets = snippets_config,
@@ -203,7 +202,7 @@ return {
       menu = {
         draw = {
           columns = {
-            { "kind_icon", "label",       "label_description", gap = 1 },
+            { "kind_icon", "label",       gap = 1 },
             { "kind",      "source_name", gap = 1 }
           },
           treesitter = { "lsp" },
