@@ -7,10 +7,12 @@ return {
   },
   config = function()
     require("luasnip.loaders.from_lua").load({ paths = { "./snippets/lua/" } })
-    require("luasnip.loaders.from_vscode").lazy_load({
-      exclude = { "python" },
-      paths = "./snippets/vs_code/"
-    })
+
+    -- load friendly-snippets without python
+    require("luasnip.loaders.from_vscode").lazy_load({ exclude = { "python" }, })
+
+    -- load my snippets (with python)
+    require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets/vs_code/" })
 
     local luasnip = require("luasnip")
 
