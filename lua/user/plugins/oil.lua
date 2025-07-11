@@ -5,17 +5,23 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   config = function()
     require("oil").setup({
+      use_default_keymaps = false,
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
-        ["<C-s>"] = { "actions.select", opts = { vertical = true } },
-        ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-        ["<C-t>"] = { "actions.select", opts = { tab = true } },
-        ["<C-p>"] = "actions.preview",
-        ["q"] = { "actions.close", mode = "n" },
-        ["<C-l>"] = "actions.refresh",
+
+        -- FIXME: Some issues with moving between windows
+        ["<leader>v"] = { "actions.select", opts = { vertical = true, split = "belowright"} },
+        ["<leader>s"] = { "actions.select", opts = { horizontal = true, split = "belowright" } },
+        ["<leader>t"] = { "actions.select", opts = { tab = true } },
         ["<leader>u"] = { "actions.parent", mode = "n" },
         ["<leader>c"] = { "actions.open_cwd", mode = "n" },
+
+        ["<C-p>"] = "actions.preview",
+
+        ["<gl>"] = "actions.refresh",
+        ["q"] = { "actions.close", mode = "n" },
+
         ["`"] = { "actions.cd", mode = "n" },
         ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
         ["gs"] = { "actions.change_sort", mode = "n" },
