@@ -123,8 +123,6 @@ return {
   dependencies = {
     { "L3MON4D3/LuaSnip" },
     { 'ribru17/blink-cmp-spell' },
-    { 'Kaiser-Yang/blink-cmp-avante' },
-    { "yetone/avante.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
     { "xzbdmw/colorful-menu.nvim", }
   },
@@ -151,7 +149,7 @@ return {
     snippets = { preset = 'luasnip' },
     keymap = keymap_config,
     sources = {
-      default = { 'lazydev', 'avante', 'spell', 'lsp', 'buffer', 'snippets', 'path' },
+      default = { 'lazydev', 'spell', 'lsp', 'buffer', 'snippets', 'path' },
       providers = {
         lsp = lsp_config,
         snippets = snippets_config,
@@ -162,13 +160,6 @@ return {
           end
         },
         spell = spell_config,
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {
-            -- options for blink-cmp-avante
-          }
-        },
         path = {
           opts = {
             get_cwd = function(_)
