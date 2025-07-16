@@ -10,20 +10,21 @@ return {
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
 
-        -- FIXME: Some issues with moving between windows
         ["<leader>v"] = { "actions.select", opts = { vertical = true, split = "belowright"} },
         ["<leader>s"] = { "actions.select", opts = { horizontal = true, split = "belowright" } },
         ["<leader>t"] = { "actions.select", opts = { tab = true } },
-        ["<leader>u"] = { "actions.parent", mode = "n" },
-        ["<leader>c"] = { "actions.open_cwd", mode = "n" },
+
+        ["-"] = { "actions.parent", mode = "n" },
+        ["_"] = { "actions.open_cwd", mode = "n" },
 
         ["<C-p>"] = "actions.preview",
 
-        ["<gl>"] = "actions.refresh",
         ["q"] = { "actions.close", mode = "n" },
 
         ["`"] = { "actions.cd", mode = "n" },
         ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
+
+        ["gl"] = "actions.refresh",
         ["gs"] = { "actions.change_sort", mode = "n" },
         ["gx"] = "actions.open_external",
         ["g."] = { "actions.toggle_hidden", mode = "n" },
