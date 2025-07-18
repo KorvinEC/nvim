@@ -107,6 +107,12 @@ return {
       end, { noremap = true, silent = true, buffer = bufnr, desc = "Format" })
 
       vim.keymap.set("n", "<space>lR", function() lsp_restart(bufnr) end, { buffer = bufnr, desc = "Restart" })
+
+      local which_key = require("which-key")
+
+      which_key.add({
+        { "<leader>l", group = " Lsp group" },
+      })
     end
 
     vim.lsp.config("*", {
