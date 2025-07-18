@@ -118,9 +118,6 @@ return {
 
           vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>",
             { buffer = event.buf, silent = true, desc = "Open output" })
-
-          vim.keymap.set("n", "]m", ":MoltenNext<CR>", { buffer = event.buf, silent = true, desc = "Next cell" })
-          vim.keymap.set("n", "[m", ":MoltenPrev<CR>", { buffer = event.buf, silent = true, desc = "Prev cell" })
         end,
       })
     end,

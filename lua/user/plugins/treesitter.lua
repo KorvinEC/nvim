@@ -10,7 +10,6 @@ return {
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-      -- NOTE: This is new, might break
       auto_install = true,
       modules = {},
       ignore_install = {},
@@ -62,29 +61,32 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
-            ["aa"] = { query = "@parameter.outer", desc = "Select outer argument (parameter)" },
-            ["ia"] = { query = "@parameter.inner", desc = "Select inner argument (parameter)" },
+            ["aa"] = { query = "@parameter.outer", desc = "Outer argument (parameter)" },
+            ["ia"] = { query = "@parameter.inner", desc = "Inner argument (parameter)" },
 
-            ["af"] = { query = "@function.outer", desc = "Select outer function" },
-            ["if"] = { query = "@function.inner", desc = "Select inner function" },
+            ["af"] = { query = "@function.outer", desc = "Outer function" },
+            ["if"] = { query = "@function.inner", desc = "Inner function" },
 
-            ["io"] = { query = "@class.inner", desc = "Select inner object (class)" },
-            ["ao"] = { query = "@class.outer", desc = "Select outer object (class)" },
+            ["ao"] = { query = "@class.outer", desc = "Outer object (class)" },
+            ["io"] = { query = "@class.inner", desc = "Inner object (class)" },
 
-            ["ic"] = { query = "@call.inner", desc = "Select inner call" },
-            ["ac"] = { query = "@call.outer", desc = "Select outer call" },
+            ["ac"] = { query = "@call.outer", desc = "Outer call" },
+            ["ic"] = { query = "@call.inner", desc = "Inner call" },
 
-            ["ik"] = { query = "@conditional.inner", desc = "Select inner conditional" },
-            ["ak"] = { query = "@conditional.outer", desc = "Select outer conditional" },
+            ["ak"] = { query = "@conditional.outer", desc = "Outer conditional" },
+            ["ik"] = { query = "@conditional.inner", desc = "Inner conditional" },
 
-            ["ij"] = { query = "@loop.inner", desc = "Select inner loop" },
-            ["aj"] = { query = "@loop.outer", desc = "Select outer loop" },
+            ["aj"] = { query = "@loop.outer", desc = "Outer loop" },
+            ["ij"] = { query = "@loop.inner", desc = "Inner loop" },
 
-            ["i/"] = { query = "@comment.inner", desc = "Select inner comment" },
-            ["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
+            ["a/"] = { query = "@comment.outer", desc = "Outer comment" },
+            ["i/"] = { query = "@comment.inner", desc = "Inner comment" },
 
-            ["au"] = "@type.outer",
-            ["iu"] = "@type.inner",
+            ["au"] = { query = "@type.outer", desc = "Outer type" },
+            ["iu"] = { query = "@type.inner", desc = "Inner type" },
+
+            ["am"] = { query = "@code_cell.outer", desc = "Outer code block" },
+            ["im"] = { query = "@code_cell.inner", desc = "Inner code block" },
           },
           selection_modes = {
             ['@parameter.outer'] = 'v',
@@ -93,12 +95,14 @@ return {
         swap = {
           enable = true,
           swap_next = {
-            ["<leader>san"] = { query = "@parameter.inner", desc = "Swap argument (parameter) with next" },
-            ["<leader>sfn"] = { query = "@function.outer", desc = "Swap function with next" },
+            ["<leader>san"] = { query = "@parameter.inner", desc = "Argument (parameter) with next" },
+            ["<leader>sfn"] = { query = "@function.outer", desc = "Function with next" },
+            ["<leader>smn"] = { query = "@code_cell.outer", desc = "Code block with next" },
           },
           swap_previous = {
-            ["<leader>sap"] = { query = "@parameter.inner", desc = "Swap arguments (parameter) with previous" },
-            ["<leader>sfp"] = { query = "@function.outer", desc = "Swap function with previous" },
+            ["<leader>sap"] = { query = "@parameter.inner", desc = "Arguments (parameter) with previous" },
+            ["<leader>sfp"] = { query = "@function.outer", desc = "Function with previous" },
+            ["<leader>smp"] = { query = "@code_cell.outer", desc = "Code block with previous" },
           },
         },
         move = {
@@ -113,6 +117,7 @@ return {
             ["]j"] = { query = "@loop.outer", desc = "Next loop start" },
             ["]/"] = { query = "@comment.outer", desc = "Next comment start" },
             ["]z"] = { query = "@fold", desc = "Next fold start" },
+            ["]m"] = { query = "@code_cell.inner", desc = "Next code block start" },
           },
           goto_next_end = {
             ["]A"] = { query = "@parameter.outer", desc = "Next argument (argument) end" },
@@ -123,6 +128,7 @@ return {
             ["]J"] = { query = "@loop.outer", desc = "Next loop end" },
             ["]?"] = { query = "@comment.outer", desc = "Next comment end" },
             ["]Z"] = { query = "@fold", desc = "Next fold end" },
+            ["]M"] = { query = "@code_cell.inner", desc = "Next code block end" },
           },
           goto_previous_start = {
             ["[a"] = { query = "@parameter.outer", desc = "Prev argument (parameter) start" },
@@ -133,6 +139,7 @@ return {
             ["[j"] = { query = "@loop.outer", desc = "Prev loop start" },
             ["[/"] = { query = "@comment.outer", desc = "Prev comment start" },
             ["[z"] = { query = "@fold", desc = "Prev fold start" },
+            ["[m"] = { query = "@code_cell.inner", desc = "Next code block start" },
           },
           goto_previous_end = {
             ["[D"] = { query = "@assignment.outer", desc = "Prev definition (assignment) end" },
@@ -144,6 +151,7 @@ return {
             ["[J"] = { query = "@loop.outer", desc = "Prev loop end" },
             ["[?"] = { query = "@comment.outer", desc = "Prev comment end" },
             ["[Z"] = { query = "@fold", desc = "Prev fold end" },
+            ["[M"] = { query = "@code_cell.inner", desc = "Next code block end" },
           },
         },
       },
@@ -153,12 +161,6 @@ return {
     -- vim way: ; goes to the direction you were moving.
     vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
     vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
-    -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-    vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-    vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-    vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-    vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 
     local which_key = require("which-key")
 
