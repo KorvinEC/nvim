@@ -10,6 +10,11 @@ return {
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
+      -- NOTE: This is new, might break
+      auto_install = true,
+      modules = {},
+      ignore_install = {},
+
       ensure_installed = {
         "c",
         "lua",
@@ -37,7 +42,8 @@ return {
         "jq",
         "comment",
         "rust",
-        "glsl"
+        "glsl",
+        "regex"
       },
       sync_install = false,
       highlight = { enable = true },
