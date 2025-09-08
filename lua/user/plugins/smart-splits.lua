@@ -1,6 +1,10 @@
 return {
   'mrjones2014/smart-splits.nvim',
-  config = function()
+  opts = {
+    move_cursor_same_row = true,
+    zellij_move_focus_or_tab = true,
+  },
+  init = function()
     -- moving between splits
     vim.keymap.set('n', '<A-h>', require('smart-splits').move_cursor_left)
     vim.keymap.set('n', '<A-j>', require('smart-splits').move_cursor_down)
