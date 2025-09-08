@@ -1,10 +1,5 @@
 return {
   {
-    "GCBallesteros/jupytext.nvim",
-    lazy = false,
-    config = true,
-  },
-  {
     "quarto-dev/quarto-nvim",
     dependencies = {
       "jmbuhr/otter.nvim",
@@ -45,6 +40,9 @@ return {
 
           vim.keymap.set("n", "<leader>r", runner.run_cell,
             { buffer = event.buf, desc = "Run cell (Quarto)", silent = true })
+          vim.keymap.set("n", "<leader>R", runner.run_below,
+            { buffer = event.buf, desc = "Run cell and below(Quarto)", silent = true })
+
           vim.keymap.set("n", "<leader>ma", runner.run_above,
             { buffer = event.buf, desc = "Run cell and above (Quarto)", silent = true })
           vim.keymap.set("n", "<leader>mA", runner.run_all,
@@ -58,16 +56,24 @@ return {
     end
   },
   {
-    "benlubas/molten-nvim",
+    "KorvinEC/molten-nvim",
+    branch = "virtual_lines_focus",
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-    dependencies = { "3rd/image.nvim", "quarto-dev/quarto-nvim" },
+    dependencies = {
+      "3rd/image.nvim",
+      "quarto-dev/quarto-nvim"
+    },
     build = ":UpdateRemotePlugins",
     init = function()
       -- these are examples, not defaults. Please see the readme
       vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_wrap_output = true
+      vim.g.molten_wrap_output = false
       vim.g.molten_virt_text_output = true
       vim.g.molten_virt_lines_off_by_1 = true
+      vim.g.molten_enter_output_behavior = "open_and_enter"
+      vim.g.molten_output_crop_border = false
+      vim.g.molten_virt_text_truncate = "top"
+      vim.g.molten_floating_window_focus = "bottom"
 
       vim.g.molten_output_win_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 
@@ -79,18 +85,18 @@ return {
         { "<leader>m", group = " Molten group" },
       })
 
-      vim.keymap.set("n", "<leader>mi", ":MoltenInit<CR>", { silent = true, desc = "initialize Molten" })
+      vim.keymap.set("n", "<leader>me", ":MoltenInit<CR>", { silent = true, desc = "Enter Molten (initialize)" })
+      vim.keymap.set("n", "<leader>mq", ":MoltenDeinit<CR>", { silent = true, desc = "Quit Molten (deinitialize)" })
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "MoltenInitPost",
         callback = function(event)
           vim.keymap.set("n", "<leader>mr", ":MoltenEvaluateOperator<CR>",
-            { buffer = event.buf, silent = true, desc = "run operator selection" })
+            { buffer = event.buf, silent = true, desc = "Molten evaluate operator" })
           vim.keymap.set("n", "<leader>mR", ":MoltenReevaluateCell<CR>",
             { buffer = event.buf, silent = true, desc = "Re-evaluate cell" })
           vim.keymap.set("v", "<leader>mr", ":<C-u>MoltenEvaluateVisual<CR>gv",
-            { buffer = event.buf, silent = true, desc = "evaluate visual selection" })
-
+            { buffer = event.buf, silent = true, desc = "Evaluate visual" })
           vim.keymap.set("n", "<leader>mL", ":MoltenEvaluateLine<CR>",
             { buffer = event.buf, silent = true, desc = "Evaluate line" })
           vim.keymap.set("n", "<leader>md", ":MoltenDelete<CR>",
@@ -102,7 +108,7 @@ return {
           vim.keymap.set("n", "<leader>mb", ":MoltenOpenInBrowser<CR>",
             { buffer = event.buf, silent = true, desc = "Open in browser" })
           vim.keymap.set("n", "<leader>mi", ":MoltenImagePopup<CR>",
-            { buffer = event.buf, silent = true, desc = "Open in browser" })
+            { buffer = event.buf, silent = true, desc = "Open popup image" })
 
           vim.keymap.set("n", "<leader>mo", ":noautocmd MoltenEnterOutput<CR>",
             { buffer = event.buf, silent = true, desc = "Open output" })
