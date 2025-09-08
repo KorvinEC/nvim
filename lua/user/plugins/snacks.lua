@@ -37,7 +37,8 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     animate = { enabled = true },
-    bufdelete = { enabled = true }
+    bufdelete = { enabled = true },
+    image = { enabled = false }
   },
   keys = {
     { "<leader>ff",  function() Snacks.picker.files({ hidden = true }) end,    desc = "Find Files" },
