@@ -102,9 +102,6 @@ return {
         { noremap = true, silent = true, buffer = bufnr, desc = "Rename" })
       vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action,
         { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
-      vim.keymap.set("n", "<space>lf", function()
-        vim.lsp.buf.format({ async = true })
-      end, { noremap = true, silent = true, buffer = bufnr, desc = "Format" })
 
       vim.keymap.set("n", "<space>lR", function() lsp_restart(bufnr) end, { buffer = bufnr, desc = "Restart" })
 
