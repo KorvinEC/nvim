@@ -71,3 +71,15 @@ vim.filetype.add {
 opt.spelllang = "en"
 opt.spell = true
 opt.spelloptions = "camel"
+
+opt.iskeyword:remove { ".", "_" }
+
+-- Save folds between files
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  group = vim.api.nvim_create_augroup("RememberFolds", { clear = true }),
+  command = "mkview",
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = vim.api.nvim_create_augroup("RememberFolds", { clear = true }),
+  command = "silent! loadview",
+})
