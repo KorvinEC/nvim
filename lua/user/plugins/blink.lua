@@ -121,7 +121,7 @@ return {
         'score',
         'sort_text',
       },
-      use_frecency = true,
+      frecency = { enabled = true },
       use_proximity = true,
     },
     snippets = { preset = 'luasnip' },
