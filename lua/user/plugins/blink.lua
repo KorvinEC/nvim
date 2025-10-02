@@ -111,6 +111,7 @@ return {
     fuzzy = {
       implementation = "prefer_rust_with_warning",
       sorts = {
+        'exact',
         function(a, b)
           local sort = require('blink.cmp.fuzzy.sort')
           if a.source_id == 'spell' and b.source_id == 'spell' then
