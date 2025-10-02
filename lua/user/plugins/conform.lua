@@ -16,7 +16,7 @@ return {
     },
   },
   init = function()
-    vim.keymap.set("n", "<space>lf", function()
+    vim.keymap.set("n", "grf", function()
       require("conform").format({ async = true })
     end, { desc = "Format" })
   end

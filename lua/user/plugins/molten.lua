@@ -24,7 +24,7 @@ return {
           hover = "H",
           definition = "gd",
           rename = "<leader>lr",
-          references = "gr",
+          references = "grr",
           format = "<leader>lf",
         },
         codeRunner = {

@@ -98,12 +98,8 @@ return {
       vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show line diagnostics" })
       vim.keymap.set('n', 'gk', vim.lsp.buf.signature_help,
         { noremap = true, silent = true, buffer = bufnr, desc = "Signature help" })
-      vim.keymap.set('n', '<space>lr', vim.lsp.buf.rename,
-        { noremap = true, silent = true, buffer = bufnr, desc = "Rename" })
-      vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action,
-        { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
 
-      vim.keymap.set("n", "<space>lR", function() lsp_restart(bufnr) end, { buffer = bufnr, desc = "Restart" })
+      vim.keymap.set("n", "grR", "<cmd>LspRestart<CR>", { buffer = bufnr, desc = "Restart" })
 
       local which_key = require("which-key")
 
