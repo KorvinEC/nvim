@@ -18,9 +18,9 @@ local lsp_config = {
 
 ---@type blink.cmp.SourceProviderConfigPartial
 local snippets_config = {
-  should_show_items = function(context, _)
-    return context.trigger.initial_kind ~= 'trigger_character'
-  end
+  -- should_show_items = function(context, _)
+  --   return context.trigger.initial_kind ~= 'trigger_character'
+  -- end
 }
 
 ---@type blink.cmp.SourceProviderConfig
