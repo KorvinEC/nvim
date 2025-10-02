@@ -88,29 +88,7 @@ local cmdline_config = {
 
 ---@type blink.cmp.KeymapConfig
 local keymap_config = {
-  preset = 'enter',
-  ['<Tab>'] = {
-    function(cmp)
-      if not cmp.is_visible() and cmp.snippet_active() then
-        return cmp.snippet_forward()
-      end
-      return cmp.select_next()
-    end,
-    'select_next',
-    'fallback',
-  },
-  ['<S-Tab>'] = {
-    function(cmp)
-      if not cmp.is_visible() and cmp.snippet_active() then
-        return cmp.snippet_backward()
-      end
-      return cmp.select_prev()
-    end,
-    'select_prev',
-    'fallback',
-  },
-  ['<C-y>'] = { 'select_and_accept' },
-
+  preset = 'default',
   ['<C-l>'] = { 'snippet_forward', 'fallback' },
   ['<C-h>'] = { 'snippet_backward', 'fallback' },
 
