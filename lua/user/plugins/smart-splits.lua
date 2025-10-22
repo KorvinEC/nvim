@@ -1,7 +1,7 @@
 return {
   'mrjones2014/smart-splits.nvim',
   opts = {
-    move_cursor_same_row = true,
+    move_cursor_same_row = false,
     zellij_move_focus_or_tab = true,
   },
   init = function()
@@ -19,9 +19,9 @@ return {
     vim.keymap.set('n', '<A-\\>', require('smart-splits').move_cursor_previous)
 
     -- swapping buffers between windows
-    vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
-    vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
-    vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
-    vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+    vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left, { desc = "Swap buffer to left" })
+    vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down, { desc = "Swap buffer to down" })
+    vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up, { desc = "Swap buffer to up" })
+    vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc = "Swap buffer to right" })
   end
 }
