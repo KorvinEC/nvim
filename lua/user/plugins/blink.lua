@@ -101,8 +101,8 @@ return {
   dependencies = {
     { "L3MON4D3/LuaSnip" },
     { 'ribru17/blink-cmp-spell' },
-    { "williamboman/mason-lspconfig.nvim" },
-    { "xzbdmw/colorful-menu.nvim", }
+    { "xzbdmw/colorful-menu.nvim" },
+    { "folke/lazydev.nvim" },
   },
   version = '*',
   ---@module 'blink.cmp'
