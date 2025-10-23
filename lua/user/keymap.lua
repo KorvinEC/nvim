@@ -12,3 +12,5 @@ keymap.set('n', 'gl', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-l><CR>', { 
 
 keymap.set("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit" })
 keymap.set("n", "<leader>Q", "<cmd>quit!<CR>", { desc = "Force quit" })
+
+keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Exit from terminal" })
