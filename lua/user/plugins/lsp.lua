@@ -2,11 +2,15 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("ruff")
 vim.lsp.enable("basedpyright")
 
-vim.diagnostic.config({
-  virtual_lines = {
-    current_line = true
-  }
-})
+vim.diagnostic.config({ virtual_text = true })
+
+vim.keymap.set('n', 'gK', function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({
+    virtual_lines = new_config,
+    virtual_text = not new_config
+  })
+end, { desc = 'Change diagnostic virtual_lines to virtual_text' })
 
 vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
 vim.cmd.highlight("default link LspInlayHint Comment")
