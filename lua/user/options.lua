@@ -27,15 +27,6 @@ opt.cursorline = true
 
 opt.termguicolors = true
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('highlight_yank', {}),
-  desc = 'Hightlight selection on yank',
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
-  end,
-})
-
 opt.clipboard = "unnamedplus"
 
 local kernel_name_release = vim.fn.system { 'uname', '--kernel-name', '--kernel-release' }
@@ -79,6 +70,7 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
   group = vim.api.nvim_create_augroup("RememberFolds", { clear = true }),
   command = "mkview",
 })
+
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("RememberFolds", { clear = true }),
   command = "silent! loadview",
