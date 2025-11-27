@@ -19,7 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { "rktjmp/lush.nvim" },
     { import = "user.plugins" },
     { import = "user.plugins.lsp" }
   },
