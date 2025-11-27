@@ -17,7 +17,7 @@ vim.cmd.hi(
   )
 )
 
-vim.cmd([[set winbar=[%n]\ %<%f\ %h%w%m%r%=%l\ \|\ %c%V]])
-vim.cmd([[set statusline=%<%t%=%P\ %y]])
+vim.opt.winbar = "[%n] %<%f %h%w%m%r%=%l | %c%V"
+vim.opt.statusline = "%<%t%=%P %y"
 
 vim.opt.laststatus = 3
