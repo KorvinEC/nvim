@@ -75,3 +75,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("RememberFolds", { clear = true }),
   command = "silent! loadview",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  command = "wincmd H"
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+  command = "wincmd ="
+})
