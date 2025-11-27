@@ -1,7 +1,14 @@
 return {
-  "mbbill/undotree",
+  "jiaoshijie/undotree",
+  ---@module 'undotree.collector'
+  ---@type UndoTreeCollector.Opts
+  opts = {
+    -- your options
+  },
+  keys = { -- load the plugin only when using it's keybinding:
+    { "<leader>ou", "<cmd>lua require('undotree').toggle()<cr>" },
+  },
   config = function()
-    vim.keymap.set("n", "<leader>ou", vim.cmd.UndotreeToggle, { desc = "Open UndoTree" })
     vim.opt.undofile = true
   end
 }
