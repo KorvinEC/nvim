@@ -29,7 +29,6 @@ return {
         input = {
           keys = {
             ["<C-y>"] = { "confirm", mode = { "n", "i" } },
-            ["<C-w>"] = { "focus_preview", mode = { "n", "i" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "n", "i" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "n", "i" } },
           }
@@ -37,7 +36,6 @@ return {
         list = {
           keys = {
             ["<C-y>"] = { "confirm", mode = { "n", "i" } },
-            ["<C-w>"] = { "focus_preview", mode = { "n", "i" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "n", "i" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "n", "i" } },
           }
