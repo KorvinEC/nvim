@@ -1,22 +1,41 @@
 return {
   'NickvanDyke/opencode.nvim',
   dependencies = {
-    -- Recommended for a better input and embedded terminal experience.
-    -- To bypass: use your own `toggle` (if any), and override `opts.on_send` and `opts.on_opencode_not_found`.
-    { 'folke/snacks.nvim', opts = { input = { enabled = true } } },
-    {
-      "cbochs/grapple.nvim",
-      dependencies = { { "nvim-tree/nvim-web-devicons", lazy = true } },
+    { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+  },
+  config = function()
+    ---@type opencode.Opts
+    vim.g.opencode_opts = {
+      select = {
+        prompt = "opencode: ",
+        sections = {
+          prompts = true,
+          commands = {
+            ["session.new"] = "Start a new session",
+            ["session.share"] = "Share the current session",
+            ["session.interrupt"] = "Interrupt the current session",
+            ["session.compact"] = "Compact the current session (reduce context size)",
+            ["session.undo"] = "Undo the last action in the current session",
+            ["session.redo"] = "Redo the last undone action in the current session",
+            ["agent.cycle"] = "Cycle the selected agent",
+          },
+          provider = true,
+        },
+        snacks = {
+          preview = "preview",
+          layout = {
+            preset = "custom_select",
+          },
+        },
+      },
     }
-  },
-  ---@type opencode.Opts
-  opts = {
-    -- Your configuration, if any
-  },
-  keys = {
-    -- Recommended keymaps
-    { '<leader>aa', function() require('opencode').ask('@cursor: ') end,    desc = 'Ask opencode',                 mode = 'n', },
-    { '<leader>aa', function() require('opencode').ask('@selection: ') end, desc = 'Ask opencode about selection', mode = 'v', },
-    { '<leader>ap', function() require('opencode').select_prompt() end,     desc = 'Select prompt',                mode = { 'n', 'v', }, },
-  },
+
+    -- Required for `opts.events.reload`.
+    vim.o.autoread = true
+
+    vim.keymap.set("n", '<leader>aa', function() require('opencode').ask('@cursor: ') end, { desc = 'Ask opencode' })
+    vim.keymap.set("v", '<leader>aa', function() require('opencode').ask('@selection: ') end,
+      { desc = 'Ask opencode about selection' })
+    vim.keymap.set({ "n", "v" }, '<leader>ap', function() require('opencode').select() end, { desc = 'Select prompt' })
+  end
 }

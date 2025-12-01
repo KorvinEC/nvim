@@ -41,6 +41,27 @@ return {
           }
         },
       },
+      layouts = {
+        custom_select = {
+          -- hidden = { "preview" },
+          layout = {
+            backdrop = false,
+            row = 2,
+            width = 0.4,
+            min_width = 80,
+            max_width = 100,
+            height = 0.4,
+            min_height = 2,
+            box = "vertical",
+            border = true,
+            title = "{title}",
+            title_pos = "center",
+            { win = "input",   height = 1,          border = "bottom" },
+            { win = "list",    border = "none" },
+            { win = "preview", title = "{preview}", height = 0.1,     border = "top" },
+          },
+        }
+      }
     },
     notifier = { enabled = false },
     quickfile = { enabled = true },
