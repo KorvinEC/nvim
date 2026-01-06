@@ -1,3 +1,40 @@
+local function fuzzy_oil()
+  local find_command = {
+    'fd',
+    '--type',
+    'd',
+  }
+
+  vim.fn.jobstart(find_command, {
+    stdout_buffered = true,
+    on_stdout = function(_, data)
+      if data then
+        local filtered = vim.tbl_filter(function(el)
+          return el ~= ''
+        end, data)
+
+        local items = {}
+        for _, v in ipairs(filtered) do
+          table.insert(items, { text = v })
+        end
+
+        ---@module 'snacks'
+        Snacks.picker.pick({
+          source = 'directories',
+          items = items,
+          layout = { preset = 'select' },
+          format = 'text',
+          confirm = function(picker, item)
+            picker:close()
+            vim.cmd('Oil ' .. item.text)
+          end,
+        })
+      end
+    end,
+  })
+end
+
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -80,6 +117,7 @@ return {
   },
   keys = {
     { "<leader>ff",  function() Snacks.picker.files({ hidden = true }) end, desc = "Find Files" },
+    { "<leader>fF",  fuzzy_oil,                                             desc = "Find Folders" },
     { "<leader>fs",  function() Snacks.picker.git_status() end,             desc = "Git Status" },
     { "<leader>fb",  function() Snacks.picker.buffers() end,                desc = "Buffers" },
     { "<leader>fn",  function() Snacks.picker.notifications() end,          desc = "Notification History" },
