@@ -63,7 +63,7 @@ opt.spelllang = "en"
 opt.spell = true
 opt.spelloptions = "camel"
 
-opt.iskeyword:remove { ".", "_" }
+-- opt.iskeyword:remove { ".", "_" }
 
 -- Save folds between files
 vim.api.nvim_create_autocmd("BufWinLeave", {
@@ -83,4 +83,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("VimResized", {
   command = "wincmd ="
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  command = "setlocal nospell"
 })
