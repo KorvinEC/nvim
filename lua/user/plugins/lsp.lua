@@ -1,6 +1,6 @@
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("ruff")
-vim.lsp.enable("basedpyright")
+vim.lsp.enable("ty")
 
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 

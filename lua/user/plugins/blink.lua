@@ -2,19 +2,7 @@
 local trigger_symbol = { "@" }
 
 ---@type blink.cmp.SourceProviderConfigPartial
-local lsp_config = {
-  transform_items = function(context, items)
-    local types = require('blink.cmp.types')
-    for _, item in ipairs(items) do
-      if item.kind == types.CompletionItemKind.Variable
-          or item.kind == types.CompletionItemKind.EnumMember
-      then
-        item.score_offset = item.score_offset + 100
-      end
-    end
-    return items
-  end,
-}
+local lsp_config = {}
 
 ---@type blink.cmp.SourceProviderConfigPartial
 local snippets_config = {

@@ -4,9 +4,9 @@
     "body": "#!/usr/bin/env python$0",
     "description": "Shebang line for the first python in PATH"
   },
-  "pyright ignore line": {
+  "ty ignore line": {
     "prefix": "#ignore",
-    "body": "# pyright: ignore[$0]",
+    "body": "# ty: ignore[$0]",
     "description": "Ignore specific line diagnostic in pyright (ignore all is unsafe)"
   },
   "Multiline string": {
