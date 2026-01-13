@@ -1,3 +1,34 @@
+local select_function = function()
+  local oil = require("oil")
+  local current_entry = oil.get_cursor_entry()
+
+  if current_entry ~= nil and current_entry.type == "directory" then
+    local current_buffer = vim.api.nvim_get_current_buf()
+
+    vim.schedule(
+      function()
+        vim.api.nvim_buf_delete(current_buffer, {})
+      end
+    )
+  end
+
+  oil.select()
+end
+
+local parent_function = function()
+  local oil = require("oil")
+
+  local current_buffer = vim.api.nvim_get_current_buf()
+
+  vim.schedule(
+    function()
+      vim.api.nvim_buf_delete(current_buffer, {})
+    end
+  )
+
+  oil.open()
+end
+
 return {
   'stevearc/oil.nvim',
   opts = {
@@ -7,17 +38,32 @@ return {
       "mtime",
       "icon",
     },
+    buf_options = {
+      buflisted = true,
+      bufhidden = "hide"
+    },
+    win_options = {
+      wrap = false,
+      signcolumn = "yes",
+      cursorcolumn = false,
+      foldcolumn = "0",
+      spell = false,
+      list = false,
+      conceallevel = 3,
+      concealcursor = "nvic",
+    },
+    cleanup_delay_ms = false,
     use_default_keymaps = false,
     keymaps = {
       ["g?"] = { "actions.show_help", mode = "n" },
-      ["<CR>"] = "actions.select",
-      ["<C-y>"] = "actions.select",
+      ["<CR>"] = { select_function },
+      ["<C-y>"] = { select_function, opts = { close = true } },
 
       ["<leader>v"] = { "actions.select", opts = { vertical = true, split = "belowright" } },
       ["<leader>s"] = { "actions.select", opts = { horizontal = true, split = "belowright" } },
-      ["<leader>t"] = { "actions.select", opts = { tab = true } },
+      ["<C-q>"] = { "actions.send_to_qflist", opts = { action = "r", only_matching_search = true, target = "qflist" } },
 
-      ["-"] = { "actions.parent", mode = "n" },
+      ["-"] = { parent_function, mode = "n" },
       ["_"] = { "actions.open_cwd", mode = "n" },
 
       ["<C-p>"] = "actions.preview",
