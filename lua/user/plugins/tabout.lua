@@ -25,7 +25,10 @@ return {
       }
     end,
     dependencies = { -- These are optional
-      "nvim-treesitter/nvim-treesitter",
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "master"
+      }
     },
     opt = true,              -- Set this to true if the plugin is optional
     event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility

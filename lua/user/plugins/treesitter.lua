@@ -1,7 +1,11 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "master",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "master",
+    },
     "folke/which-key.nvim",
   },
   event = { "BufReadPre", "BufNewFile" },
