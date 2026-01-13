@@ -15,25 +15,25 @@ local function fuzzy_oil()
 
         local items = {}
         for _, v in ipairs(filtered) do
-          table.insert(items, { text = v })
+          table.insert(items, { text = v, file = v })
         end
 
         ---@module 'snacks'
-        Snacks.picker.pick({
-          source = 'directories',
-          items = items,
-          layout = { preset = 'select' },
-          format = 'text',
-          confirm = function(picker, item)
-            picker:close()
-            vim.cmd('Oil ' .. item.text)
-          end,
-        })
+        Snacks.picker.pick(
+          {
+            source = 'directories',
+            items = items,
+            format = 'text',
+            confirm = function(picker, item)
+              picker:close()
+              vim.cmd('Oil ' .. item.text)
+            end,
+          }
+        )
       end
     end,
   })
 end
-
 
 return {
   "folke/snacks.nvim",
