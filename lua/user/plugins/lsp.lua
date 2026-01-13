@@ -1,7 +1,3 @@
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("ruff")
-vim.lsp.enable("ty")
-
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.keymap.set('n', 'grK', function()
@@ -47,7 +43,9 @@ vim.keymap.set('n', 'grK', function()
       end
     end
   )
-end, { desc = 'Enable or disable virtual text or lines' })
+end, {
+  desc = 'Enable or disable virtual text or lines'
+})
 
 vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
 vim.cmd.highlight("default link LspInlayHint Comment")
@@ -69,14 +67,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if client.server_capabilities.inlayHintProvider or client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      vim.notify("Inlay hints enabled")
+
+      local buffer_string = string.format("[%d] %s", bufnr, vim.fn.bufname(bufnr))
+      vim.notify("Inlay hints enabled for " .. buffer_string)
     end
 
     vim.keymap.set("n", "grh", function()
-      local inlay_hint_enabled = not vim.lsp.inlay_hint.is_enabled()
+      local buffer_number = vim.fn.bufnr()
 
-      vim.lsp.inlay_hint.enable(inlay_hint_enabled)
-      vim.notify(inlay_hint_enabled and "Inlay hints enabled" or "Inlay hints disasbled")
+      local inlay_hint_enabled = not vim.lsp.inlay_hint.is_enabled({ bufnr = buffer_number })
+
+      vim.lsp.inlay_hint.enable(inlay_hint_enabled, { bufnr = buffer_number })
+
+      local buffer_string = string.format("[%d] %s", bufnr, vim.fn.bufname(bufnr))
+      local messsage_string = inlay_hint_enabled and "enabled" or "disabled"
+
+      vim.notify("Inlay hints " .. messsage_string .. " for " .. buffer_string)
     end, { desc = "Toggle inlay hints" })
   end,
 })
