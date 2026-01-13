@@ -37,5 +37,9 @@ return {
     vim.keymap.set("v", '<leader>aa', function() require('opencode').ask('@selection: ') end,
       { desc = 'Ask opencode about selection' })
     vim.keymap.set({ "n", "v" }, '<leader>ap', function() require('opencode').select() end, { desc = 'Select prompt' })
-  end
+  end,
+  keys = {
+    { "<leader>aa", mode = { "n", "v" }, desc = 'Ask opencode' },
+    { "<leader>ap", mode = { "n", "v" }, desc = 'Select prompt' },
+  },
 }

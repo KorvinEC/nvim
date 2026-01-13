@@ -13,4 +13,7 @@ return {
 
     vim.keymap.set('n', '<leader>oe', dbee.toggle, { desc = "Toggle Dbee" })
   end,
+  keys = {
+    { '<leader>oe', mode = 'n', desc = 'Toggle Dbee' }
+  },
 }
