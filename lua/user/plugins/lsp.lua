@@ -1,5 +1,8 @@
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
+vim.lsp.enable("ruff")
+vim.lsp.enable("ty")
+
 vim.keymap.set('n', 'grK', function()
   vim.ui.select(
     {
@@ -68,8 +71,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.server_capabilities.inlayHintProvider or client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
-      local buffer_string = string.format("[%d] %s", bufnr, vim.fn.bufname(bufnr))
-      vim.notify("Inlay hints enabled for " .. buffer_string)
     end
 
     vim.keymap.set("n", "grh", function()
@@ -79,11 +80,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
       vim.lsp.inlay_hint.enable(inlay_hint_enabled, { bufnr = buffer_number })
 
-      local buffer_string = string.format("[%d] %s", bufnr, vim.fn.bufname(bufnr))
+      local filename = vim.fn.fnamemodify(
+        vim.fn.bufname(bufnr),
+        ":t"
+      )
+
       local messsage_string = inlay_hint_enabled and "enabled" or "disabled"
 
-      vim.notify("Inlay hints " .. messsage_string .. " for " .. buffer_string)
+      vim.api.nvim_echo(
+        {
+          {
+            string.format(
+              "Inlay hints %s for [%d] %s",
+              messsage_string,
+              bufnr,
+              filename
+            )
+          }
+        },
+        true,
+        {}
+      )
     end, { desc = "Toggle inlay hints" })
+
+    vim.api.nvim_create_autocmd("BufEnter", {
+      group = vim.api.nvim_create_augroup("LspCodelens", { clear = true }),
+      callback = function(args)
+        vim.lsp.codelens.refresh()
+        local lenses = vim.lsp.codelens.get(args.buf)
+
+        vim.notify(
+          string.format(
+            "Available lenses: %s",
+            vim.inspect(lenses)
+          )
+        )
+      end,
+    })
   end,
 })
 
