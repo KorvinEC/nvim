@@ -7,6 +7,7 @@ return {
       virtual_symbol = '',
       virtual_symbol_prefix = ' ',
       virtual_symbol_suffix = ' ',
+      exclude_filetypes = { "lazy" }
     })
   end
 }
