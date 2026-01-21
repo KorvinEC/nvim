@@ -1,11 +1,16 @@
 return {
   'MeanderingProgrammer/render-markdown.nvim',
-  dependencies = { { 'nvim-treesitter/nvim-treesitter', branch = "master"}, 'echasnovski/mini.nvim' },
+  dependencies = { 'nvimtreesitter/nvim-treesitter' },
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {},
   init = function()
-    vim.keymap.set("n", "<leader>bm", ":RenderMarkdown buf_toggle<CR>",
+    local render_markdown = require("render-markdown")
+
+    vim.keymap.set("n", "<leader>bm", render_markdown.buf_toggle,
+      { desc = "Toggle render markdown" })
+
+    vim.keymap.set("n", "<leader>bp", render_markdown.preview,
       { desc = "Toggle render markdown" })
   end
 }
