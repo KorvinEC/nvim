@@ -103,20 +103,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       )
     end, { desc = "Toggle inlay hints" })
 
-    vim.api.nvim_create_autocmd("BufEnter", {
-      group = vim.api.nvim_create_augroup("LspCodelens", { clear = true }),
-      callback = function(args)
-        vim.lsp.codelens.refresh()
-        local lenses = vim.lsp.codelens.get(args.buf)
-
-        vim.notify(
-          string.format(
-            "Available lenses: %s",
-            vim.inspect(lenses)
-          )
-        )
-      end,
-    })
+    for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+      vim.api.nvim_set_hl(0, group, {})
+    end
   end,
 })
 
