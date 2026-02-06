@@ -1,3 +1,10 @@
+local colorscheme_exists, _ = pcall(vim.cmd.colorscheme, "gruvbox")
+
+if colorscheme_exists then
+  vim.o.background = "dark"
+  vim.cmd.colorscheme("gruvbox")
+end
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
