@@ -1,7 +1,7 @@
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.lsp.enable("ruff")
-vim.lsp.enable("ty")
+vim.lsp.enable("basedpyright")
 
 vim.keymap.set('n', 'grK', function()
   vim.ui.select(
@@ -71,6 +71,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.server_capabilities.inlayHintProvider or client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
+      -- local filename = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ":t")
+      --
+      -- -- NOTE: Do something with annoying messages
+      -- vim.api.nvim_echo(
+      --   {
+      --     {
+      --       string.format("Inlay hints enabled for [%d] %s", bufnr, filename)
+      --     }
+      --   },
+      --   true,
+      --   {}
+      -- )
     end
 
     vim.keymap.set("n", "grh", function()
@@ -108,15 +120,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
-return {
-  "folke/lazydev.nvim",
-  ft = "lua", -- only load on lua files
-  opts = {
-    library = {
-      -- See the configuration section for more details
-      -- Load luvit types when the `vim.uv` word is found
-      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-    },
-  },
-}
