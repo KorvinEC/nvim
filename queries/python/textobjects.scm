@@ -18,3 +18,11 @@
   "->" @type.outer
   . 
   (type) @type.inner @type.outer)
+
+; Generic type
+((type_parameter (type) @type.inner) @type.outer)
+
+(constrained_type 
+  ":" @type.outer 
+  . 
+  (type) @type.inner @type.outer)
