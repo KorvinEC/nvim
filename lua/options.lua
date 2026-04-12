@@ -88,3 +88,5 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.api.nvim_create_autocmd("TermOpen", {
   command = "setlocal nospell"
 })
+
+require("vim._core.ui2").enable({})

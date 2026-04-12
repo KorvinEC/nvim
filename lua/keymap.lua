@@ -41,10 +41,13 @@ local loclist_function = function()
   vim.cmd.lopen()
 end
 
+
 keymap.set("n", "<leader>e", quickfix_list_function, { desc = "Open quickfix list" })
 keymap.set("n", "<leader>c", loclist_function, { desc = "Open location list" })
 
 keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Open diagnostics in location list" })
+
+keymap.set("n", "<leader>r", function() vim.cmd("make") end, { desc = "Run make program" })
 
 local function get_make_arguments()
   vim.ui.input(
@@ -57,7 +60,7 @@ local function get_make_arguments()
   )
 end
 
-keymap.set("n", "<leader>R", get_make_arguments, { desc = "Run make program" })
+keymap.set("n", "<leader>R", get_make_arguments, { desc = "Run make program with arguments" })
 
 vim.keymap.set("n", "<leader>yp", function()
   local path = vim.fn.expand("%:p")
@@ -70,3 +73,14 @@ vim.keymap.set("n", "<leader>yn", function()
   vim.fn.setreg("+", path)
   print("File name: ", path)
 end, { desc = "Copy file name" })
+
+-- Add some --insert-- mode keybindings
+keymap.set("i", "<C-e>", "<C-o>$", { desc = "Move to the end" })
+keymap.set("i", "<C-a>", "<C-o>^", { desc = "Move to the start" })
+keymap.set("i", "<M-d>", "<C-o>dw", { desc = "Delete one forward word" })
+keymap.set("i", "<M-b>", "<C-o>b", { desc = "Move one word backward" })
+keymap.set("i", "<M-f>", "<C-o>w", { desc = "Move one word forward" })
+
+-- Command mode
+keymap.set('c', '<C-a>', '<Home>')
+keymap.set('c', '<C-e>', '<End>')

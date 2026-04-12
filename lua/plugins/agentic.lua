@@ -6,4 +6,4 @@ require("agentic").setup({
   provider = "opencode-acp"
 })
 
-vim.keymap.set({ "n", "v", "i" }, "<leader>oo", function() require("agentic").toggle() end, { desc = "Toggle Opencode" })
+vim.keymap.set({ "n", "v" }, "<leader>oo", function() require("agentic").toggle() end, { desc = "Toggle Opencode" })

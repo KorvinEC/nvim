@@ -2,8 +2,6 @@ vim.pack.add({
   "https://github.com/folke/which-key.nvim"
 })
 
-print("in which-key")
-
 local which_key = require("which-key")
 
 which_key.setup({
