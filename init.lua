@@ -51,7 +51,7 @@ require("plugins.autopairs")
 
 -- luasnip should be loaded before blink
 require("plugins.luasnip")
-require("plugins.blink")
+--require("plugins.blink")
 
 require("plugins.conform")
 require("plugins.flash")

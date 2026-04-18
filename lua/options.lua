@@ -90,3 +90,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 require("vim._core.ui2").enable({})
+
+vim.opt.wildmode = "noselect:lastused,full"
+vim.opt.wildoptions = "pum"
+
+vim.opt.complete = "o^5,.^5,w^5,b^5,u^5,kspell^5"
