@@ -80,7 +80,3 @@ keymap.set("i", "<C-a>", "<C-o>^", { desc = "Move to the start" })
 keymap.set("i", "<M-d>", "<C-o>dw", { desc = "Delete one forward word" })
 keymap.set("i", "<M-b>", "<C-o>b", { desc = "Move one word backward" })
 keymap.set("i", "<M-f>", "<C-o>w", { desc = "Move one word forward" })
-
--- Command mode
-keymap.set('c', '<C-a>', '<Home>')
-keymap.set('c', '<C-e>', '<End>')
