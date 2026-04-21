@@ -6,9 +6,8 @@ local which_key = require("which-key")
 
 which_key.setup({
   spec = {
-    { "<leader>z", group = " Trouble toggles" },
     { "<leader>o", group = " Open menu" },
-    { "<leader>n", group = " Avante LLM" },
+    -- TODO: Move to snacks
     { "<leader>f", group = " Picker" }
   }
 })
