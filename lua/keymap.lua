@@ -80,3 +80,17 @@ keymap.set("i", "<C-a>", "<C-o>^", { desc = "Move to the start" })
 keymap.set("i", "<M-d>", "<C-o>dw", { desc = "Delete one forward word" })
 keymap.set("i", "<M-b>", "<C-o>b", { desc = "Move one word backward" })
 keymap.set("i", "<M-f>", "<C-o>w", { desc = "Move one word forward" })
+
+local create_scratch_buffer = function()
+  local current_window = vim.api.nvim_get_current_win()
+  local buffer = vim.api.nvim_create_buf(true, false)
+
+  vim.api.nvim_win_set_buf(current_window, buffer)
+
+  vim.bo[buffer].buftype = "nofile"
+  vim.bo[buffer].bufhidden = "wipe"
+  vim.bo[buffer].swapfile = false
+  vim.bo[buffer].buflisted = true
+end
+
+keymap.set("n", "<leader>n", create_scratch_buffer, { desc = "Create scratch buffer" })
