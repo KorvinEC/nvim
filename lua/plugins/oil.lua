@@ -1,5 +1,5 @@
 vim.pack.add({
-  { src =   "https://github.com/stevearc/oil.nvim.git", name = "oil"},
+  { src = "https://github.com/stevearc/oil.nvim.git", name = "oil" },
   "https://github.com/nvim-tree/nvim-web-devicons.git"
 })
 
@@ -35,7 +35,7 @@ local parent_function = function()
 end
 
 require("oil").setup({
-  default_file_explorer = false,
+  default_file_explorer = true,
   columns = {
     "permissions",
     "size",
