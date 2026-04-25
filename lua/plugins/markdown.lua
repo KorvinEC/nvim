@@ -10,4 +10,4 @@ vim.keymap.set("n", "<leader>bm", render_markdown.buf_toggle,
   { desc = "Toggle render markdown" })
 
 vim.keymap.set("n", "<leader>bp", render_markdown.preview,
-  { desc = "Toggle render markdown" })
+  { desc = "Markdown preview" })

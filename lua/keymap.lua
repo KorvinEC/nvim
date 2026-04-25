@@ -88,9 +88,12 @@ local create_scratch_buffer = function()
   vim.api.nvim_win_set_buf(current_window, buffer)
 
   vim.bo[buffer].buftype = "nofile"
-  vim.bo[buffer].bufhidden = "wipe"
+  vim.bo[buffer].bufhidden = "hide"
   vim.bo[buffer].swapfile = false
   vim.bo[buffer].buflisted = true
 end
 
 keymap.set("n", "<leader>n", create_scratch_buffer, { desc = "Create scratch buffer" })
+
+keymap.set("n", "<leader>bl", "<cmd>set list!<CR>", { desc = "Toggle show hidden characters" })
+keymap.set("n", "<leader>bs", "<cmd>set spell!<CR>", { desc = "Toggle spell check" })

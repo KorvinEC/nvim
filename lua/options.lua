@@ -95,3 +95,5 @@ vim.opt.wildmode = "noselect:lastused,full"
 vim.opt.wildoptions = "pum"
 
 vim.opt.complete = "o^5,.^5,w^5,b^5,u^5,kspell^5"
+
+vim.opt.listchars = "eol:$,space:\\u2022"
